@@ -1,11 +1,11 @@
-[![REUSE status](https://api.reuse.software/badge/github.com/emartech/expo-emarsys-plugin)](https://api.reuse.software/info/github.com/emartech/expo-emarsys-plugin)
+[![REUSE status](https://api.reuse.software/badge/github.com/emartech/expo-plugin-for-sap-emarsys)](https://api.reuse.software/info/github.com/emartech/expo-plugin-for-sap-emarsys)
 
-# Expo Emarsys Plugin
+# Expo Plugin for SAP Emarsys
 
 > **Important**  
 > This plugin is in Pilot release. Please contact your Client Success Manager before starting the implementation.
 
-The Expo Emarsys Plugin automatically integrates the **Emarsys SDK** into your Expo app’s native modules.  
+The Expo Plugin for SAP Emarsys automatically integrates the **Emarsys SDK** into your Expo app’s native modules.  
 It works **alongside the [React Native Emarsys Wrapper](https://github.com/emartech/react-native-emarsys-sdk/wiki)**, which provides the full API for interacting with Emarsys features.
 
 ---
@@ -13,7 +13,7 @@ It works **alongside the [React Native Emarsys Wrapper](https://github.com/emart
 ## Installation
 
 ```bash
-npm install "git+ssh://git@github.com/emartech/expo-emarsys-plugin.git#<version>" --save
+npm install "git+ssh://git@github.com/emartech/expo-plugin-for-sap-emarsys.git#<version>" --save
 ```
 
 ---
@@ -28,7 +28,7 @@ npm install "git+ssh://git@github.com/emartech/expo-emarsys-plugin.git#<version>
     ...
     "plugins": [
       [
-        "expo-emarsys-plugin",
+        "expo-plugin-for-sap-emarsys",
         {
           "applicationCode": <APPLICATION_CODE: STRING>,
           "merchantId": <MERCHANT_ID: STRING>,

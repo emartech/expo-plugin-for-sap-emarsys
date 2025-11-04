@@ -21,7 +21,7 @@ export const withEmarsysDangerousMod: ConfigPlugin<EMSOptions> = (config, _optio
       // Notification Service Extension
       // Copy files
       // TODO - get pluginDir with require.resolve
-      const pluginDir = `${projectRoot}/node_modules/expo-emarsys-plugin`;
+      const pluginDir = `${projectRoot}/node_modules/expo-plugin-for-sap-emarsys`;
       const sourceDir = path.join(pluginDir, 'ios', NOTIFICATION_SERVICE_TARGET);
       const destDir = path.join(projectRoot, 'ios', NOTIFICATION_SERVICE_TARGET);
       if (!fs.existsSync(`${destDir}`)) {

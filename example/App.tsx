@@ -21,7 +21,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
-        <Text style={styles.header}>Expo Emarsys Plugin</Text>
+        <Text style={styles.header}>Expo Plugin for SAP Emarsys</Text>
         <Button title="Set Contact" onPress={() => {
           console.log('Set Contact pressed');
           const contactFieldId = 100010824;

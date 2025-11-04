@@ -111,7 +111,7 @@ describe('withEmarsysDangerousMod', () => {
       
       expectedFiles.forEach(file => {
         expect(mockFs.copyFileSync).toHaveBeenCalledWith(
-          `/test/project/node_modules/expo-emarsys-plugin/ios/NotificationService/${file}`,
+          `/test/project/node_modules/expo-plugin-for-sap-emarsys/ios/NotificationService/${file}`,
           `/test/project/ios/NotificationService/${file}`
         );
       });
@@ -123,7 +123,7 @@ describe('withEmarsysDangerousMod', () => {
       withEmarsysDangerousMod(mockConfig, mockOptions);
       
       expect(mockPath.join).toHaveBeenCalledWith(
-        '/test/project/node_modules/expo-emarsys-plugin',
+        '/test/project/node_modules/expo-plugin-for-sap-emarsys',
         'ios',
         'NotificationService'
       );

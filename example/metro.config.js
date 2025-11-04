@@ -19,7 +19,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  'expo-emarsys-plugin': '..',
+  'expo-plugin-for-sap-emarsys': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];

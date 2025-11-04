@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "expo": "~53.0.20",
-    "expo-emarsys-plugin": "file:../",
+    "expo-plugin-for-sap-emarsys": "file:../",
     "expo-notifications": "~0.31.4",
     "react": "19.0.0",
     "react-native": "0.79.5",
