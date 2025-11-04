@@ -1,7 +1,7 @@
 {
-  "name": "expo-emarsys-plugin",
+  "name": "expo-plugin-for-sap-emarsys",
   "version": "0.1.0",
-  "description": "Expo Emarsys Plugin",
+  "description": "Expo Plugin for SAP Emarsys",
   "main": "build/withEmarsysPlugin.js",
   "types": "build/withEmarsysPlugin.d.ts",
   "scripts": {
@@ -22,16 +22,14 @@
   "keywords": [
     "react-native",
     "expo",
-    "expo-emarsys-plugin",
-    "ExpoEmarsysPlugin"
+    "expo-plugin-for-sap-emarsys",
+    "ExpoPluginForSAPEmarsys"
   ],
-  "repository": "https://github.com/emartech/expo-emarsys-plugin",
-  "bugs": {
-    "url": "https://github.com/emartech/expo-emarsys-plugin/issues"
-  },
+  "repository": "https://github.com/emartech/expo-plugin-for-sap-emarsys",
+
   "author": "Emarsys <g-gsuite-mobileengineers@emarsys.com> (https://github.com/emartech)",
   "license": "Apache 2.0",
-  "homepage": "https://github.com/emartech/expo-emarsys-plugin#readme",
+  "homepage": "https://github.com/emartech/expo-plugin-for-sap-emarsys#readme",
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^22.0.0",

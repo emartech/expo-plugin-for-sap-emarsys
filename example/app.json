@@ -32,7 +32,7 @@
     },
     "plugins": [
       [
-        "expo-emarsys-plugin",
+        "expo-plugin-for-sap-emarsys",
         {
           "applicationCode": "EMSE7-A1D58",
           "merchantId": "102F6519FC312033",
