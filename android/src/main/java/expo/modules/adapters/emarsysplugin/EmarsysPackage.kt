@@ -10,8 +10,4 @@ class EmarsysPackage: Package {
     override fun createApplicationLifecycleListeners(context: Context?): List<ApplicationLifecycleListener> {
         return listOf(EmarsysApplicationLifecycleListener())
     }
-
-    override fun createReactActivityLifecycleListeners(activityContext: Context): List<ReactActivityLifecycleListener> {
-        return listOf(EmarsysReactActivityLifecycleListener())
-    }
 }
