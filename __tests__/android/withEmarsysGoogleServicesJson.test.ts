@@ -1,5 +1,5 @@
 import { ExpoConfig } from 'expo/config';
-import { withEmarsysGoogleServicesJson } from '../../src/android/withEmarsysGoogleServicesJson';
+import { withEmarsysGoogleServicesJson } from '../../src/expo/android/withEmarsysGoogleServicesJson';
 
 // Mock the expo/config-plugins module
 jest.mock('expo/config-plugins', () => ({

@@ -1,5 +1,5 @@
 import { ExpoConfig } from 'expo/config';
-import { withEmarsysEntitlements } from '../../src/ios/withEmarsysEntitlements';
+import { withEmarsysEntitlements } from '../../src/expo/ios/withEmarsysEntitlements';
 import { EMSOptions } from '../../src/types';
 
 // Mock the expo/config-plugins module

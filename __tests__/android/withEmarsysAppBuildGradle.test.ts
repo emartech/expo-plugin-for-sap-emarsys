@@ -1,7 +1,7 @@
 import { ExpoConfig } from 'expo/config';
 import {
   withEmarsysAppBuildGradle
-} from '../../src/android/withEmarsysAppBuildGradle';
+} from '../../src/expo/android/withEmarsysAppBuildGradle';
 
 // Mock the expo/config-plugins module
 jest.mock('expo/config-plugins', () => ({
@@ -54,7 +54,6 @@ dependencies {
 
     expect(result.modResults.contents).toContain('coreLibraryDesugaringEnabled true');
     expect(result.modResults.contents).toContain("coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs_nio:2.1.5'");
-    expect(result.modResults.contents).toContain("implementation platform('com.google.firebase:firebase-bom:34.0.0')");
     expect(result.modResults.contents).toContain("apply plugin: 'com.google.gms.google-services'");
   });
 
@@ -97,7 +96,6 @@ android {
 dependencies {
   implementation 'androidx.core:core:1.8.0'
   coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs_nio:2.1.5'
-  implementation platform('com.google.firebase:firebase-bom:34.0.0')
 }
 apply plugin: 'com.google.gms.google-services'`;
 
@@ -113,12 +111,10 @@ apply plugin: 'com.google.gms.google-services'`;
     // Count occurrences to ensure no duplication
     const desugaringMatches = result.modResults.contents.match(/coreLibraryDesugaringEnabled true/g);
     const desugaringDepMatches = result.modResults.contents.match(/coreLibraryDesugaring 'com\.android\.tools:desugar_jdk_libs_nio:2\.1\.5'/g);
-    const firebaseMatches = result.modResults.contents.match(/implementation platform\('com\.google\.firebase:firebase-bom:34\.0\.0'\)/g);
     const pluginMatches = result.modResults.contents.match(/apply plugin: 'com\.google\.gms\.google-services'/g);
 
     expect(desugaringMatches).toHaveLength(1);
     expect(desugaringDepMatches).toHaveLength(1);
-    expect(firebaseMatches).toHaveLength(1);
     expect(pluginMatches).toHaveLength(1);
   });
 
@@ -141,7 +137,6 @@ dependencies {
     const result = withEmarsysAppBuildGradle(configWithAppBuildGradle) as ConfigWithModResults;
 
     expect(result.modResults.contents).toContain("coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs_nio:2.1.5'");
-    expect(result.modResults.contents).toContain("implementation platform('com.google.firebase:firebase-bom:34.0.0')");
   });
 
   it('should add google-services plugin at the end', () => {

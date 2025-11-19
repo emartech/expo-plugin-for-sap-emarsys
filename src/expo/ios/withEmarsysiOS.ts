@@ -1,7 +1,7 @@
 import {
   ConfigPlugin,
 } from 'expo/config-plugins';
-import { EMSOptions } from '../types';
+import { EMSOptions } from '../../types';
 import { withEmarsysInfoPlist } from './withEmarsysInfoPlist';
 import { withEmarsysDangerousMod } from './withEmarsysDangerousMod';
 import { withEmarsysXcodeProject } from './withEmarsysXcodeProject';

@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, '..', 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name           = 'ExpoEmarsysPlugin'
+  s.name           = 'ExpoPluginForSAPEmarsys'
   s.version        = package['version']
   s.summary        = package['description']
   s.description    = package['description']
@@ -18,6 +18,8 @@ Pod::Spec.new do |s|
   s.source         = { git: 'https://github.com/emartech/expo-plugin-for-sap-emarsys' }
   s.static_framework = true
 
+  s.dependency 'React'
+  s.dependency 'ReactCodegen'
   s.dependency 'ExpoModulesCore'
   s.dependency 'EmarsysSDK', '~> 3.9.0'
   s.dependency 'RNEmarsysWrapper'
@@ -27,5 +29,5 @@ Pod::Spec.new do |s|
     'DEFINES_MODULE' => 'YES',
   }
 
-  s.source_files = "**/*.{h,m,mm,swift,hpp,cpp}"
+  s.source_files = '**/*.{h,m,mm,swift,hpp,cpp}'
 end

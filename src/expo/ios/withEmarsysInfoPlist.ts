@@ -2,8 +2,8 @@ import {
   ConfigPlugin,
   withInfoPlist
 } from 'expo/config-plugins';
-import { EMSOptions } from '../types';
-import { STORE_NAME } from '../constants';
+import { EMSOptions } from '../../types';
+import { STORE_NAME } from '../../constants';
 
 
 export const withEmarsysInfoPlist: ConfigPlugin<EMSOptions> = (config, options) =>

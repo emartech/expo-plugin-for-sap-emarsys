@@ -1,13 +1,14 @@
-apply plugin: 'com.android.library'
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
 
-group = 'expo.modules.emarsysplugin'
-version = '0.0.1'
-
+// expo plugin - START
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 apply from: expoModulesCorePlugin
 applyKotlinExpoModulesCorePlugin()
 useCoreDependencies()
 useExpoPublishing()
+// expo plugin - END
 
 // If you want to use the managed Android SDK versions from expo-modules-core, set this to true.
 // The Android SDK versions will be bumped from time to time in SDK releases and may introduce breaking changes in your module code.
@@ -23,19 +24,22 @@ if (useManagedAndroidSdkVersions) {
     }
   }
   project.android {
-    compileSdkVersion safeExtGet("compileSdkVersion", 34)
+    compileSdkVersion safeExtGet("compileSdkVersion", 36)
     defaultConfig {
-      minSdkVersion safeExtGet("minSdkVersion", 21)
-      targetSdkVersion safeExtGet("targetSdkVersion", 34)
+      minSdkVersion safeExtGet("minSdkVersion", 24)
+      targetSdkVersion safeExtGet("targetSdkVersion", 36)
     }
   }
 }
 
 android {
-  namespace "expo.modules.adapters.emarsysplugin"
+  namespace "com.emarsys.reactnative"
   defaultConfig {
     versionCode 1
     versionName "0.0.1"
+  }
+  kotlinOptions {
+    jvmTarget = '17'
   }
   lintOptions {
     abortOnError false
@@ -43,8 +47,9 @@ android {
 }
 
 dependencies {
+  implementation "androidx.core:core-ktx:1.16.0"
   implementation "com.facebook.react:react-native:+"
-  implementation "com.emarsys:emarsys-sdk:3.10.+"
-  implementation "com.emarsys:emarsys-firebase:3.10.+"
-  implementation project(':react-native-emarsys-wrapper')
+  api "com.emarsys:emarsys-sdk:3.10.+"
+  api "com.emarsys:emarsys-firebase:3.10.+"
+  api project(':react-native-emarsys-wrapper')
 }

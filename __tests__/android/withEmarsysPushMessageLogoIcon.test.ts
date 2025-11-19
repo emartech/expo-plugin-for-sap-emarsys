@@ -1,5 +1,5 @@
 import { ExpoConfig } from 'expo/config';
-import { withEmarsysPushMessageLogoIcon } from '../../src/android/withEmarsysPushMessageLogoIcon';
+import { withEmarsysPushMessageLogoIcon } from '../../src/expo/android/withEmarsysPushMessageLogoIcon';
 
 // Mock the expo/config-plugins module
 jest.mock('expo/config-plugins', () => ({
@@ -29,7 +29,7 @@ jest.mock('expo/config-plugins', () => ({
 }));
 
 // Mock the helper function
-jest.mock('../../src/android/withEmarsysAndroidHelpers', () => ({
+jest.mock('../../src/expo/android/withEmarsysAndroidHelpers', () => ({
   setMetaData: jest.fn(),
 }));
 
@@ -78,7 +78,7 @@ type ConfigWithModRequest = ExpoConfig & {
 
 describe('withPushMessageLogoIcon', () => {
   let mockConfig: ConfigWithModRequest;
-  const { setMetaData } = require('../../src/android/withEmarsysAndroidHelpers');
+  const { setMetaData } = require('../../src/expo/android/withEmarsysAndroidHelpers');
 
   beforeEach(() => {
     mockConfig = {

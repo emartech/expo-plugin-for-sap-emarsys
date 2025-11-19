@@ -1,4 +1,4 @@
-package expo.modules.adapters.emarsysplugin
+package com.emarsys.reactnative.expo
 
 import android.app.Application
 import expo.modules.core.interfaces.ApplicationLifecycleListener

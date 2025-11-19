@@ -1,5 +1,5 @@
 import { ExpoConfig } from 'expo/config';
-import { withEmarsysPodfileConfig } from '../../src/ios/withEmarsysPodfileConfig';
+import { withEmarsysPodfileConfig } from '../../src/expo/ios/withEmarsysPodfileConfig';
 
 // Mock the expo/config-plugins module
 jest.mock('expo/config-plugins', () => ({
