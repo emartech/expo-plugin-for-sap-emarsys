@@ -1,1 +1,1 @@
-export const STORE_NAME = 'com.emarsys.rnwrapper';
+export const STORE_NAME = 'com.emarsys.reactnative';

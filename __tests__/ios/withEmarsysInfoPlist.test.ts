@@ -13,9 +13,9 @@ describe('withEmarsysInfoPlist', () => {
   type InfoPlistConfig = ExpoConfig & {
     modResults: {
       [key: string]: any;
-      'com.emarsys.rnwrapper.applicationCode'?: string;
-      'com.emarsys.rnwrapper.merchantId'?: string;
-      'com.emarsys.rnwrapper.enableConsoleLogging'?: boolean;
+      'com.emarsys.reactnative.applicationCode'?: string;
+      'com.emarsys.reactnative.merchantId'?: string;
+      'com.emarsys.reactnative.enableConsoleLogging'?: boolean;
     };
   };
 
@@ -73,7 +73,7 @@ describe('withEmarsysInfoPlist', () => {
   });
 
   describe('Info.plist modifications', () => {
-    it('should add com.emarsys.rnwrapper.applicationCode when applicationCode is provided', () => {
+    it('should add com.emarsys.reactnative.applicationCode when applicationCode is provided', () => {
       const result = withEmarsysInfoPlist(mockConfig, {
         applicationCode: 'TEST123',
         merchantId: 'MERCHANT456',
@@ -83,10 +83,10 @@ describe('withEmarsysInfoPlist', () => {
         iosSharedKeychainAccessGroup: ''
       }) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBe('TEST123');
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBe('TEST123');
     });
 
-    it('should add com.emarsys.rnwrapper.merchantId when merchantId is provided', () => {
+    it('should add com.emarsys.reactnative.merchantId when merchantId is provided', () => {
       const result = withEmarsysInfoPlist(mockConfig, {
         applicationCode: 'TEST123',
         merchantId: 'MERCHANT456',
@@ -96,37 +96,37 @@ describe('withEmarsysInfoPlist', () => {
         iosSharedKeychainAccessGroup: ''
       }) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBe('MERCHANT456');
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBe('MERCHANT456');
     });
 
-    it('should add both com.emarsys.rnwrapper.applicationCode and com.emarsys.rnwrapper.merchantId when both are provided', () => {
+    it('should add both com.emarsys.reactnative.applicationCode and com.emarsys.reactnative.merchantId when both are provided', () => {
       const result = withEmarsysInfoPlist(mockConfig, mockOptions) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBe('TEST_APP_CODE');
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBe('TEST_MERCHANT_ID');
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBe(true);
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBe('TEST_APP_CODE');
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBe('TEST_MERCHANT_ID');
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBe(true);
     });
 
-    it('should not add com.emarsys.rnwrapper.applicationCode when applicationCode is not provided', () => {
+    it('should not add com.emarsys.reactnative.applicationCode when applicationCode is not provided', () => {
       const result = withEmarsysInfoPlist(mockConfig, {
         applicationCode: '',
         merchantId: 'MERCHANT456',
         enableConsoleLogging: false
       } as EMSOptions) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBeUndefined();
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBe('MERCHANT456');
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBe('MERCHANT456');
     });
 
-    it('should not add com.emarsys.rnwrapper.merchantId when merchantId is not provided', () => {
+    it('should not add com.emarsys.reactnative.merchantId when merchantId is not provided', () => {
       const result = withEmarsysInfoPlist(mockConfig, {
         applicationCode: 'TEST123',
         merchantId: '',
         enableConsoleLogging: false
       } as EMSOptions) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBe('TEST123');
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBe('TEST123');
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBeUndefined();
     });
 
     it('should not add any keys when both options are not provided', () => {
@@ -136,31 +136,31 @@ describe('withEmarsysInfoPlist', () => {
         enableConsoleLogging: false
       } as EMSOptions) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBeUndefined();
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBeUndefined();
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBeUndefined();
     });
 
-    it('should not add com.emarsys.rnwrapper.applicationCode when applicationCode is empty string', () => {
+    it('should not add com.emarsys.reactnative.applicationCode when applicationCode is empty string', () => {
       const result = withEmarsysInfoPlist(mockConfig, {
         applicationCode: '',
         merchantId: 'MERCHANT456',
         enableConsoleLogging: false
       } as EMSOptions) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBeUndefined();
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBe('MERCHANT456');
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBe('MERCHANT456');
     });
 
-    it('should not add com.emarsys.rnwrapper.merchantId when merchantId is empty string', () => {
+    it('should not add com.emarsys.reactnative.merchantId when merchantId is empty string', () => {
       const result = withEmarsysInfoPlist(mockConfig, {
         applicationCode: 'TEST123',
         merchantId: '',
         enableConsoleLogging: false
       } as EMSOptions) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBe('TEST123');
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBe('TEST123');
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBeUndefined();
     });
 
     it('should not add keys when both options are empty strings', () => {
@@ -170,9 +170,9 @@ describe('withEmarsysInfoPlist', () => {
         enableConsoleLogging: false
       } as EMSOptions) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBeUndefined();
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBeUndefined();
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBeUndefined();
     });
 
     it('should preserve existing modResults properties', () => {
@@ -190,17 +190,17 @@ describe('withEmarsysInfoPlist', () => {
       expect(result.modResults.CFBundleVersion).toBe('1.0.0');
       expect(result.modResults.CFBundleDisplayName).toBe('MyApp');
       expect(result.modResults.SomeOtherKey).toBe('SomeValue');
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBe('TEST_APP_CODE');
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBe('TEST_MERCHANT_ID');
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBe(true);
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBe('TEST_APP_CODE');
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBe('TEST_MERCHANT_ID');
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBe(true);
     });
 
-    it('should overwrite existing com.emarsys.rnwrapper.applicationCode when provided', () => {
+    it('should overwrite existing com.emarsys.reactnative.applicationCode when provided', () => {
       const configWithExistingEMS: InfoPlistConfig = {
         ...mockConfig,
         modResults: {
-          'com.emarsys.rnwrapper.applicationCode': 'OLD_CODE',
-          'com.emarsys.rnwrapper.merchantId': 'OLD_MERCHANT'
+          'com.emarsys.reactnative.applicationCode': 'OLD_CODE',
+          'com.emarsys.reactnative.merchantId': 'OLD_MERCHANT'
         }
       };
 
@@ -213,11 +213,11 @@ describe('withEmarsysInfoPlist', () => {
         iosSharedKeychainAccessGroup: ''
       }) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBe('NEW_CODE');
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBe('NEW_MERCHANT');
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBe('NEW_CODE');
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBe('NEW_MERCHANT');
     });
 
-    it('should add com.emarsys.rnwrapper.enableConsoleLogging when enableConsoleLogging is true', () => {
+    it('should add com.emarsys.reactnative.enableConsoleLogging when enableConsoleLogging is true', () => {
       const result = withEmarsysInfoPlist(mockConfig, {
         applicationCode: 'TEST123',
         merchantId: 'MERCHANT456',
@@ -227,10 +227,10 @@ describe('withEmarsysInfoPlist', () => {
         iosSharedKeychainAccessGroup: ''
       }) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBe(true);
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBe(true);
     });
 
-    it('should not add com.emarsys.rnwrapper.enableConsoleLogging when enableConsoleLogging is false', () => {
+    it('should not add com.emarsys.reactnative.enableConsoleLogging when enableConsoleLogging is false', () => {
       const result = withEmarsysInfoPlist(mockConfig, {
         applicationCode: 'TEST123',
         merchantId: 'MERCHANT456',
@@ -240,7 +240,7 @@ describe('withEmarsysInfoPlist', () => {
         iosSharedKeychainAccessGroup: ''
       }) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBeUndefined();
     });
 
     it('should work with only enableConsoleLogging set to true', () => {
@@ -253,18 +253,18 @@ describe('withEmarsysInfoPlist', () => {
         iosSharedKeychainAccessGroup: ''
       }) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBeUndefined();
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBeUndefined();
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBe(true);
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBeUndefined();
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBe(true);
     });
 
-    it('should overwrite existing com.emarsys.rnwrapper.enableConsoleLogging when provided', () => {
+    it('should overwrite existing com.emarsys.reactnative.enableConsoleLogging when provided', () => {
       const configWithExistingEMS: InfoPlistConfig = {
         ...mockConfig,
         modResults: {
-          'com.emarsys.rnwrapper.applicationCode': 'OLD_CODE',
-          'com.emarsys.rnwrapper.merchantId': 'OLD_MERCHANT',
-          'com.emarsys.rnwrapper.enableConsoleLogging': false
+          'com.emarsys.reactnative.applicationCode': 'OLD_CODE',
+          'com.emarsys.reactnative.merchantId': 'OLD_MERCHANT',
+          'com.emarsys.reactnative.enableConsoleLogging': false
         }
       };
 
@@ -277,9 +277,9 @@ describe('withEmarsysInfoPlist', () => {
         iosSharedKeychainAccessGroup: ''
       }) as InfoPlistConfig;
 
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBe('NEW_CODE');
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBe('NEW_MERCHANT');
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBe(true);
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBe('NEW_CODE');
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBe('NEW_MERCHANT');
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBe(true);
     });
   });
 
@@ -302,9 +302,9 @@ describe('withEmarsysInfoPlist', () => {
       const result = withEmarsysInfoPlist(minimalConfig, mockOptions) as InfoPlistConfig;
       
       expect(result.name).toBe('minimal-app');
-      expect(result.modResults['com.emarsys.rnwrapper.applicationCode']).toBe('TEST_APP_CODE');
-      expect(result.modResults['com.emarsys.rnwrapper.merchantId']).toBe('TEST_MERCHANT_ID');
-      expect(result.modResults['com.emarsys.rnwrapper.enableConsoleLogging']).toBe(true);
+      expect(result.modResults['com.emarsys.reactnative.applicationCode']).toBe('TEST_APP_CODE');
+      expect(result.modResults['com.emarsys.reactnative.merchantId']).toBe('TEST_MERCHANT_ID');
+      expect(result.modResults['com.emarsys.reactnative.enableConsoleLogging']).toBe(true);
     });
 
     it('should throw when config is missing modResults', () => {

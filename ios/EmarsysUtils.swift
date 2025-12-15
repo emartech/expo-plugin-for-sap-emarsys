@@ -10,7 +10,7 @@ public struct EmarsysOptions {
 
 public class EmarsysUtils {
   
-  private static let EMARSYS_WRAPPER_PREFIX = "com.emarsys.rnwrapper"
+  private static let EMARSYS_WRAPPER_PREFIX = "com.emarsys.reactnative"
   
   public static func fetchStoredAttributes() -> EmarsysOptions {
     // Fetch applicationCode and merchantId using StorageUtil with Info.plist fallback

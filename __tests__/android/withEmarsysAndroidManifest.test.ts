@@ -81,7 +81,7 @@ describe('withEmarsysAndroidManifest', () => {
       expect.arrayContaining([
         expect.objectContaining({
           $: {
-            'android:name': 'com.emarsys.rnwrapper.applicationCode',
+            'android:name': 'com.emarsys.reactnative.applicationCode',
             'android:value': 'TEST123'
           }
         })
@@ -113,7 +113,7 @@ describe('withEmarsysAndroidManifest', () => {
       expect.arrayContaining([
         expect.objectContaining({
           $: {
-            'android:name': 'com.emarsys.rnwrapper.merchantId',
+            'android:name': 'com.emarsys.reactnative.merchantId',
             'android:value': 'MERCHANT456'
           }
         })
@@ -278,13 +278,13 @@ describe('withEmarsysAndroidManifest', () => {
             'meta-data': [
               {
                 $: {
-                  'android:name': 'com.emarsys.rnwrapper.applicationCode',
+                  'android:name': 'com.emarsys.reactnative.applicationCode',
                   'android:value': 'EXISTING123'
                 }
               },
               {
                 $: {
-                  'android:name': 'com.emarsys.rnwrapper.merchantId',
+                  'android:name': 'com.emarsys.reactnative.merchantId',
                   'android:value': 'EXISTING456'
                 }
               }
@@ -320,10 +320,10 @@ describe('withEmarsysAndroidManifest', () => {
     
     // Should not duplicate existing meta-data
     const applicationCodeEntries = app['meta-data']?.filter(
-      (meta: any) => meta.$['android:name'] === 'com.emarsys.rnwrapper.applicationCode'
+      (meta: any) => meta.$['android:name'] === 'com.emarsys.reactnative.applicationCode'
     );
     const merchantIdEntries = app['meta-data']?.filter(
-      (meta: any) => meta.$['android:name'] === 'com.emarsys.rnwrapper.merchantId'
+      (meta: any) => meta.$['android:name'] === 'com.emarsys.reactnative.merchantId'
     );
     
     expect(applicationCodeEntries).toHaveLength(1);
@@ -337,7 +337,7 @@ describe('withEmarsysAndroidManifest', () => {
   });
 
   describe('enableConsoleLogging functionality', () => {
-    it('should add com.emarsys.rnwrapper.enableConsoleLogging meta-data when enableConsoleLogging is true', () => {
+    it('should add com.emarsys.reactnative.enableConsoleLogging meta-data when enableConsoleLogging is true', () => {
       const configWithManifest: AndroidManifestConfig = {
         ...mockConfig,
         modResults: {
@@ -361,7 +361,7 @@ describe('withEmarsysAndroidManifest', () => {
         expect.arrayContaining([
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.enableConsoleLogging',
+              'android:name': 'com.emarsys.reactnative.enableConsoleLogging',
               'android:value': 'true'
             }
           })
@@ -369,7 +369,7 @@ describe('withEmarsysAndroidManifest', () => {
       );
     });
 
-    it('should not add com.emarsys.rnwrapper.enableConsoleLogging meta-data when enableConsoleLogging is false', () => {
+    it('should not add com.emarsys.reactnative.enableConsoleLogging meta-data when enableConsoleLogging is false', () => {
       const configWithManifest: AndroidManifestConfig = {
         ...mockConfig,
         modResults: {
@@ -390,12 +390,12 @@ describe('withEmarsysAndroidManifest', () => {
 
       const app = result.modResults.manifest.application[0];
       const enableConsoleLoggingEntries = app['meta-data']?.filter(
-        (meta: any) => meta.$['android:name'] === 'com.emarsys.rnwrapper.enableConsoleLogging'
+        (meta: any) => meta.$['android:name'] === 'com.emarsys.reactnative.enableConsoleLogging'
       );
       expect(enableConsoleLoggingEntries || []).toHaveLength(0);
     });
 
-    it('should add com.emarsys.rnwrapper.enableConsoleLogging with all other options', () => {
+    it('should add com.emarsys.reactnative.enableConsoleLogging with all other options', () => {
       const configWithManifest: AndroidManifestConfig = {
         ...mockConfig,
         modResults: {
@@ -419,19 +419,19 @@ describe('withEmarsysAndroidManifest', () => {
         expect.arrayContaining([
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.applicationCode',
+              'android:name': 'com.emarsys.reactnative.applicationCode',
               'android:value': 'FULL_TEST'
             }
           }),
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.merchantId',
+              'android:name': 'com.emarsys.reactnative.merchantId',
               'android:value': 'FULL_MERCHANT'
             }
           }),
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.enableConsoleLogging',
+              'android:name': 'com.emarsys.reactnative.enableConsoleLogging',
               'android:value': 'true'
             }
           })
@@ -462,7 +462,7 @@ describe('withEmarsysAndroidManifest', () => {
       expect(app['meta-data']).toEqual([
         expect.objectContaining({
           $: {
-            'android:name': 'com.emarsys.rnwrapper.enableConsoleLogging',
+            'android:name': 'com.emarsys.reactnative.enableConsoleLogging',
             'android:value': 'true'
           }
         })
@@ -494,7 +494,7 @@ describe('withEmarsysAndroidManifest', () => {
       expect(app.service).toBeDefined();
     });
 
-    it('should overwrite existing com.emarsys.rnwrapper.enableConsoleLogging when provided', () => {
+    it('should overwrite existing com.emarsys.reactnative.enableConsoleLogging when provided', () => {
       const configWithManifest: AndroidManifestConfig = {
         ...mockConfig,
         modResults: {
@@ -502,17 +502,17 @@ describe('withEmarsysAndroidManifest', () => {
             application: [{
               'meta-data': [{
                 $: {
-                  'android:name': 'com.emarsys.rnwrapper.applicationCode',
+                  'android:name': 'com.emarsys.reactnative.applicationCode',
                   'android:value': 'OLD_CODE'
                 }
               }, {
                 $: {
-                  'android:name': 'com.emarsys.rnwrapper.merchantId',
+                  'android:name': 'com.emarsys.reactnative.merchantId',
                   'android:value': 'OLD_MERCHANT'
                 }
               }, {
                 $: {
-                  'android:name': 'com.emarsys.rnwrapper.enableConsoleLogging',
+                  'android:name': 'com.emarsys.reactnative.enableConsoleLogging',
                   'android:value': 'false'
                 }
               }]
@@ -535,19 +535,19 @@ describe('withEmarsysAndroidManifest', () => {
         expect.arrayContaining([
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.applicationCode',
+              'android:name': 'com.emarsys.reactnative.applicationCode',
               'android:value': 'NEW_CODE'
             }
           }),
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.merchantId',
+              'android:name': 'com.emarsys.reactnative.merchantId',
               'android:value': 'NEW_MERCHANT'
             }
           }),
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.enableConsoleLogging',
+              'android:name': 'com.emarsys.reactnative.enableConsoleLogging',
               'android:value': 'true'
             }
           })
@@ -555,7 +555,7 @@ describe('withEmarsysAndroidManifest', () => {
       );
     });
 
-    it('should preserve other existing meta-data when adding com.emarsys.rnwrapper.enableConsoleLogging', () => {
+    it('should preserve other existing meta-data when adding com.emarsys.reactnative.enableConsoleLogging', () => {
       const configWithManifest: AndroidManifestConfig = {
         ...mockConfig,
         modResults: {
@@ -592,19 +592,19 @@ describe('withEmarsysAndroidManifest', () => {
           }),
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.applicationCode',
+              'android:name': 'com.emarsys.reactnative.applicationCode',
               'android:value': 'TEST_CODE'
             }
           }),
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.merchantId',
+              'android:name': 'com.emarsys.reactnative.merchantId',
               'android:value': 'TEST_MERCHANT'
             }
           }),
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.enableConsoleLogging',
+              'android:name': 'com.emarsys.reactnative.enableConsoleLogging',
               'android:value': 'true'
             }
           })
@@ -612,7 +612,7 @@ describe('withEmarsysAndroidManifest', () => {
       );
     });
 
-    it('should not duplicate com.emarsys.rnwrapper.enableConsoleLogging meta-data entries', () => {
+    it('should not duplicate com.emarsys.reactnative.enableConsoleLogging meta-data entries', () => {
       const configWithManifest: AndroidManifestConfig = {
         ...mockConfig,
         modResults: {
@@ -620,17 +620,17 @@ describe('withEmarsysAndroidManifest', () => {
             application: [{
               'meta-data': [{
                 $: {
-                  'android:name': 'com.emarsys.rnwrapper.applicationCode',
+                  'android:name': 'com.emarsys.reactnative.applicationCode',
                   'android:value': 'OLD_CODE'
                 }
               }, {
                 $: {
-                  'android:name': 'com.emarsys.rnwrapper.merchantId',
+                  'android:name': 'com.emarsys.reactnative.merchantId',
                   'android:value': 'OLD_MERCHANT'
                 }
               }, {
                 $: {
-                  'android:name': 'com.emarsys.rnwrapper.enableConsoleLogging',
+                  'android:name': 'com.emarsys.reactnative.enableConsoleLogging',
                   'android:value': 'false'
                 }
               }]
@@ -650,14 +650,14 @@ describe('withEmarsysAndroidManifest', () => {
 
       const app = result.modResults.manifest.application[0];
       const enableConsoleLoggingEntries = app['meta-data']?.filter(
-        (meta: any) => meta.$['android:name'] === 'com.emarsys.rnwrapper.enableConsoleLogging'
+        (meta: any) => meta.$['android:name'] === 'com.emarsys.reactnative.enableConsoleLogging'
       );
       
       // Should not duplicate - only one entry should exist
       expect(enableConsoleLoggingEntries).toHaveLength(1);
       expect(enableConsoleLoggingEntries![0]).toEqual({
         $: {
-          'android:name': 'com.emarsys.rnwrapper.enableConsoleLogging',
+          'android:name': 'com.emarsys.reactnative.enableConsoleLogging',
           'android:value': 'true'
         }
       });
@@ -665,7 +665,7 @@ describe('withEmarsysAndroidManifest', () => {
   });
 
   describe('androidSharedPackageNames functionality', () => {
-    it('should add com.emarsys.rnwrapper.sharedPackageNames meta-data when androidSharedPackageNames is provided', () => {
+    it('should add com.emarsys.reactnative.sharedPackageNames meta-data when androidSharedPackageNames is provided', () => {
       const configWithManifest: AndroidManifestConfig = {
         ...mockConfig,
         modResults: {
@@ -689,7 +689,7 @@ describe('withEmarsysAndroidManifest', () => {
         expect.arrayContaining([
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.sharedPackageNames',
+              'android:name': 'com.emarsys.reactnative.sharedPackageNames',
               'android:value': 'com.example.app1,com.example.app2'
             }
           })
@@ -697,7 +697,7 @@ describe('withEmarsysAndroidManifest', () => {
       );
     });
 
-    it('should add com.emarsys.rnwrapper.sharedSecret meta-data when androidSharedSecret is provided', () => {
+    it('should add com.emarsys.reactnative.sharedSecret meta-data when androidSharedSecret is provided', () => {
       const configWithManifest: AndroidManifestConfig = {
         ...mockConfig,
         modResults: {
@@ -721,7 +721,7 @@ describe('withEmarsysAndroidManifest', () => {
         expect.arrayContaining([
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.sharedSecret',
+              'android:name': 'com.emarsys.reactnative.sharedSecret',
               'android:value': 'secret123'
             }
           })
@@ -753,7 +753,7 @@ describe('withEmarsysAndroidManifest', () => {
         expect.arrayContaining([
           expect.objectContaining({
             $: {
-              'android:name': 'com.emarsys.rnwrapper.sharedPackageNames',
+              'android:name': 'com.emarsys.reactnative.sharedPackageNames',
               'android:value': 'com.example.single'
             }
           })
@@ -782,7 +782,7 @@ describe('withEmarsysAndroidManifest', () => {
 
       const app = result.modResults.manifest.application[0];
       const sharedPackageEntries = app['meta-data']?.filter(
-        (meta: any) => meta.$['android:name'] === 'com.emarsys.rnwrapper.sharedPackageNames'
+        (meta: any) => meta.$['android:name'] === 'com.emarsys.reactnative.sharedPackageNames'
       );
       expect(sharedPackageEntries || []).toHaveLength(0);
     });
