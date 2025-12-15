@@ -15,7 +15,7 @@ data class EmarsysOptions(
 
 object EmarsysUtils {
   
-  private const val EMARSYS_WRAPPER_PREFIX = "com.emarsys.rnwrapper"
+  private const val EMARSYS_WRAPPER_PREFIX = "com.emarsys.reactnative"
   
   fun parseCommaSeparatedList(value: String?): List<String> {
     return value
