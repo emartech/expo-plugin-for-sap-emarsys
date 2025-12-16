@@ -18,16 +18,15 @@ Pod::Spec.new do |s|
   s.source         = { git: 'https://github.com/emartech/expo-plugin-for-sap-emarsys' }
   s.static_framework = true
 
-  s.dependency 'React'
-  s.dependency 'ReactCodegen'
-  s.dependency 'ExpoModulesCore'
-  s.dependency 'EmarsysSDK', '~> 3.9.0'
-  s.dependency 'RNEmarsysWrapper'
-
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
   }
+
+  install_modules_dependencies(s)
+  s.dependency 'ExpoModulesCore'
+  s.dependency 'EmarsysSDK', '~> 3.9.0'
+  s.dependency 'RNEmarsysWrapper'
 
   s.source_files = '**/*.{h,m,mm,swift,hpp,cpp}'
 end
