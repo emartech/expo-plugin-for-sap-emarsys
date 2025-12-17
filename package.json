@@ -1,6 +1,6 @@
 {
   "name": "expo-plugin-for-sap-emarsys",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Expo Plugin for SAP Emarsys",
   "main": "build/withEmarsysPlugin.js",
   "types": "build/withEmarsysPlugin.d.ts",
