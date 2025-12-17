@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
-  s.dependency 'EmarsysSDK'
+  s.dependency 'EmarsysSDK', '~> 3.9.0'
   s.dependency 'RNEmarsysWrapper'
 
   # Swift/Objective-C compatibility
