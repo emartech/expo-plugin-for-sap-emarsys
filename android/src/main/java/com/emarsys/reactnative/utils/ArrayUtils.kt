@@ -8,6 +8,14 @@ import org.json.JSONObject
 
 object ArrayUtils {
 
+  fun toList(string: String?, delimiter: String = ","): List<String>? {
+    return string
+      ?.split(delimiter)
+      ?.map { it.trim() }
+      ?.filter { it.isNotEmpty() }
+      ?: null
+  }
+
   fun toWritableArray(jsonArray: JSONArray?): WritableArray? {
     if (jsonArray == null) {
       return null

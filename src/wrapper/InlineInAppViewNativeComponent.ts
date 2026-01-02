@@ -1,11 +1,11 @@
 import React from 'react';
 import type { HostComponent, ViewProps } from 'react-native';
-import type { UnsafeMixed, BubblingEventHandler } from 'react-native/Libraries/Types/CodegenTypes';
+import type { BubblingEventHandler, UnsafeMixed } from 'react-native/Libraries/Types/CodegenTypes';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 
 export interface NativeProps extends ViewProps {
-  onAppEvent?: BubblingEventHandler<AppEvent> | null;
+  onEvent?: BubblingEventHandler<Event> | null;
   onCompletion?: BubblingEventHandler<Completion> | null;
   onClose?: BubblingEventHandler<Close> | null;
 }
@@ -22,8 +22,8 @@ export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
   supportedCommands: ['loadInApp']
 });
 
-type AppEvent = {
-  eventName: string;
+type Event = {
+  name: string;
   payload?: UnsafeMixed | null;
 };
 
