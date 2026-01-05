@@ -34,15 +34,15 @@ class InlineInAppViewManager(context: ReactApplicationContext) : SimpleViewManag
   override fun createViewInstance(context: ThemedReactContext): InlineInAppView {
     val view = InlineInAppView(context)
 
-    view.inlineInAppView.onAppEventListener = { s: String?, jsonObject: JSONObject ->
-      dispatchEvent(view, "onAppEvent", Arguments.createMap().apply {
-        putString("eventName", s)
-        putMap("payload", MapUtils.toWritableMap(jsonObject)?.getMap("payload"))
+    view.inlineInAppView.onAppEventListener = { property: String?, json: JSONObject ->
+      dispatchEvent(view, "onEvent", Arguments.createMap().apply {
+        putString("name", property)
+        putMap("payload", MapUtils.toWritableMap(json)?.getMap("payload"))
       })
     }
-    view.inlineInAppView.onCompletionListener = CompletionListener { throwable: Throwable? ->
+    view.inlineInAppView.onCompletionListener = CompletionListener { errorCause: Throwable? ->
       dispatchEvent(view, "onCompletion", Arguments.createMap().apply {
-        putString("error", throwable?.localizedMessage ?: "")
+        putString("error", errorCause?.localizedMessage ?: "")
       })
     }
     view.inlineInAppView.onCloseListener = {
@@ -54,7 +54,7 @@ class InlineInAppViewManager(context: ReactApplicationContext) : SimpleViewManag
 
   override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> =
     mapOf(
-      "onAppEvent"    to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onAppEvent")),
+      "onEvent"       to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onEvent")),
       "onCompletion"  to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onCompletion")),
       "onClose"       to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onClose"))
     )
@@ -87,6 +87,8 @@ class InlineInAppView : LinearLayout {
     addView(inlineInAppView)
   }
 
+  // Native components do not re-layout properly, width and height remain 0 .
+  // Workaround based on:
   // https://github.com/facebook/react-native/issues/4990
   // https://github.com/facebook/react-native/issues/17968
 

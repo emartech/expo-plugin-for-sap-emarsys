@@ -15,7 +15,7 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_VIEW_PROPERTY(onAppEvent, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onEvent, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCompletion, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onClose, RCTBubblingEventBlock)
 
@@ -47,9 +47,9 @@ using namespace facebook::react;
     _view = [[EMSInlineInAppView alloc] init];
     
     __weak InlineInAppView *weakSelf = self;
-    _view.eventHandler = ^(NSString *eventName, NSDictionary<NSString *, NSObject *> *payload) {
-      weakSelf.eventEmitter.onAppEvent(InlineInAppViewEventEmitter::OnAppEvent{
-        .eventName = [eventName UTF8String],
+    _view.eventHandler = ^(NSString *eventName, NSDictionary<NSString *, id> *payload) {
+      weakSelf.eventEmitter.onEvent(InlineInAppViewEventEmitter::OnEvent{
+        .name = [eventName UTF8String],
         .payload = convertIdToFollyDynamic(payload)
       });
     };
