@@ -1,7 +1,7 @@
 import { ConfigPlugin, createRunOncePlugin } from "expo/config-plugins";
 import { withEmarsysAndroid } from "./android/withEmarsysAndroid";
 import { withEmarsysiOS } from "./ios/withEmarsysiOS";
-import { EMSOptions } from "./types";
+import { EMSOptions } from "../types";
 
 const withEmarsysPlugin: ConfigPlugin<EMSOptions> = (
   config,
@@ -13,7 +13,7 @@ const withEmarsysPlugin: ConfigPlugin<EMSOptions> = (
   return config;
 };
 
-const pkg = require("../package.json");
+const pkg = require("../../package.json");
 
 export default createRunOncePlugin(
   withEmarsysPlugin,

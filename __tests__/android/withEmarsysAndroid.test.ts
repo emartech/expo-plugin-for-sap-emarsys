@@ -1,6 +1,6 @@
 import { 
   withEmarsysAndroid
-} from '../../src/android/withEmarsysAndroid';
+} from '../../src/expo/android/withEmarsysAndroid';
 import { EMSOptions } from '../../src/types';
 
 describe('withEmarsysAndroid', () => {

@@ -1,6 +1,6 @@
 import { 
   withEmarsysiOS
-} from '../../src/ios/withEmarsysiOS';
+} from '../../src/expo/ios/withEmarsysiOS';
 import { EMSOptions } from '../../src/types';
 
 describe('withEmarsysiOS', () => {

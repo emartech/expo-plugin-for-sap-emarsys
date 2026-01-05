@@ -1,10 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true,
-    "paths": {
-      "expo-plugin-for-sap-emarsys": ["../src/withEmarsysPlugin"],
-      "expo-plugin-for-sap-emarsys/*": ["../src/*"]
-    }
+    "strict": true
   }
 }

@@ -2,7 +2,7 @@ import {
   ConfigPlugin,
   withXcodeProject,
 } from 'expo/config-plugins';
-import { EMSOptions } from '../types';
+import { EMSOptions } from '../../types';
 
 const NOTIFICATION_SERVICE_TARGET = 'NotificationService';
 const NOTIFICATION_SERVICE_FILES = [

@@ -2,7 +2,7 @@ import ExpoModulesCore
 import EmarsysSDK
 import RNEmarsysWrapper
 
-public class AppDelegateSubscriber: ExpoAppDelegateSubscriber {
+public class EmarsysAppDelegateSubscriber: ExpoAppDelegateSubscriber {
 
   public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     let options = EmarsysUtils.fetchStoredAttributes()

@@ -1,5 +1,5 @@
 import { ExpoConfig } from 'expo/config';
-import { withEmarsysDangerousMod } from '../../src/ios/withEmarsysDangerousMod';
+import { withEmarsysDangerousMod } from '../../src/expo/ios/withEmarsysDangerousMod';
 import { EMSOptions } from '../../src/types';
 
 // Mock the expo/config-plugins module
@@ -111,7 +111,7 @@ describe('withEmarsysDangerousMod', () => {
       
       expectedFiles.forEach(file => {
         expect(mockFs.copyFileSync).toHaveBeenCalledWith(
-          `/test/project/node_modules/expo-plugin-for-sap-emarsys/ios/NotificationService/${file}`,
+          `/test/project/node_modules/expo-plugin-for-sap-emarsys/ios/expo/NotificationService/${file}`,
           `/test/project/ios/NotificationService/${file}`
         );
       });
@@ -125,6 +125,7 @@ describe('withEmarsysDangerousMod', () => {
       expect(mockPath.join).toHaveBeenCalledWith(
         '/test/project/node_modules/expo-plugin-for-sap-emarsys',
         'ios',
+        'expo',
         'NotificationService'
       );
       expect(mockPath.join).toHaveBeenCalledWith(
@@ -138,8 +139,7 @@ describe('withEmarsysDangerousMod', () => {
   describe('Podfile modifications', () => {
     const expectedPodfileTarget = `
 target 'NotificationService' do
-  use_frameworks! :linkage => podfile_properties['ios.useFrameworks'].to_sym if podfile_properties['ios.useFrameworks']
-  use_frameworks! :linkage => ENV['USE_FRAMEWORKS'].to_sym if ENV['USE_FRAMEWORKS']
+  use_frameworks!
 
   pod 'EmarsysNotificationService'
 end`;

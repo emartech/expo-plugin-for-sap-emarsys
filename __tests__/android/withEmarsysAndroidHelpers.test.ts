@@ -1,4 +1,4 @@
-import { setMetaData, addEmarsysMessagingService } from '../../src/android/withEmarsysAndroidHelpers';
+import { setMetaData, addEmarsysMessagingService } from '../../src/expo/android/withEmarsysAndroidHelpers';
 
 describe('withEmarsysAndroidHelpers', () => {
   describe('setMetaData', () => {

@@ -1,1 +1,1 @@
-module.exports = require("./build/withEmarsysPlugin");
+module.exports = require("./build/expo/withEmarsysPlugin");

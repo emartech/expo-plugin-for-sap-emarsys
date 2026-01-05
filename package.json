@@ -2,19 +2,20 @@
   "name": "expo-plugin-for-sap-emarsys",
   "version": "0.0.1",
   "description": "Expo Plugin for SAP Emarsys",
-  "main": "build/withEmarsysPlugin.js",
-  "types": "build/withEmarsysPlugin.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "build": "expo-module build",
     "clean": "expo-module clean",
     "lint": "expo-module lint",
     "lint:all": "eslint src __tests__",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "prepare": "expo-module prepare",
+    "postinstall": "node scripts/postinstall.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "expo-module:test": "expo-module test",
-    "prepare": "expo-module prepare",
-    "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module",
     "open:ios": "xed example/ios",
     "open:android": "open -a \"Android Studio\" example/android"
@@ -26,7 +27,6 @@
     "ExpoPluginForSAPEmarsys"
   ],
   "repository": "https://github.com/emartech/expo-plugin-for-sap-emarsys",
-
   "author": "Emarsys <g-gsuite-mobileengineers@emarsys.com> (https://github.com/emartech)",
   "license": "Apache 2.0",
   "homepage": "https://github.com/emartech/expo-plugin-for-sap-emarsys#readme",
@@ -41,8 +41,20 @@
     "ts-jest": "^29.4.1"
   },
   "peerDependencies": {
-    "expo": "*",
     "react": "*",
     "react-native": "*"
+  },
+  "codegenConfig": {
+    "name": "NativeEmarsys",
+    "type": "all",
+    "jsSrcsDir": "src/wrapper",
+    "android": {
+      "javaPackageName": "com.emarsys.reactnative.wrapper"
+    },
+    "ios": {
+      "componentProvider": {
+        "InlineInAppView": "InlineInAppView"
+      }
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { ExpoConfig } from 'expo/config';
-import { withEmarsysXcodeProject } from '../../src/ios/withEmarsysXcodeProject';
+import { withEmarsysXcodeProject } from '../../src/expo/ios/withEmarsysXcodeProject';
 import { EMSOptions } from '../../src/types';
 
 // Mock the expo/config-plugins module
