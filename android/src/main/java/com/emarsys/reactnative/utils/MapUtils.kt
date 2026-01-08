@@ -18,7 +18,7 @@ object MapUtils {
     while (iterator.hasNext()) {
       try {
         val key = iterator.next()
-        val value = jsonObject.get(key)
+        val value = jsonObject.opt(key)
 
         if (value is String) {
           writableMap.putString(key, jsonObject.getString(key))

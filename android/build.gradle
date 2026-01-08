@@ -51,5 +51,4 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
   api "com.emarsys:emarsys-sdk:3.10.+"
   api "com.emarsys:emarsys-firebase:3.10.+"
-  api project(':react-native-emarsys-wrapper')
 }

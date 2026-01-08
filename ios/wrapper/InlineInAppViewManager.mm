@@ -1,5 +1,4 @@
 #import <EmarsysSDK/EMSInlineInAppView.h>
-#import <React/RCTFollyConvert.h>
 #import <React/RCTUIManager.h>
 #import <React/RCTViewComponentView.h>
 #import <React/RCTViewManager.h>
@@ -7,6 +6,17 @@
 #import <react/renderer/components/NativeEmarsys/EventEmitters.h>
 #import <react/renderer/components/NativeEmarsys/Props.h>
 #import <react/renderer/components/NativeEmarsys/RCTComponentViewHelpers.h>
+
+// Import FollyConvert.h based on React Native version
+#if __has_include(<react/utils/FollyConvert.h>)
+  #import <react/utils/FollyConvert.h>
+#elif __has_include("FollyConvert.h")
+  #import "FollyConvert.h"
+#elif __has_include(<React/RCTFollyConvert.h>)
+  #import <React/RCTFollyConvert.h>
+#else
+  #error "FollyConvert.h not found."
+#endif
 
 @interface InlineInAppViewManager : RCTViewManager
 @end

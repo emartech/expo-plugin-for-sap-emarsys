@@ -4,24 +4,24 @@
 
 @implementation StorageUtils
 
-+ (NSString *) stringForKey:(NSString *)key {
++ (NSString *)stringForKey:(NSString *)key {
   NSString *value = [self userDefaultsStringForKey:key] ?: [self infoPListStringForKey:key];
   return ![value isEqualToString:@""] ? value : nil;
 }
 
-+ (NSString *) userDefaultsStringForKey:(NSString *)key {
++ (NSString *)userDefaultsStringForKey:(NSString *)key {
   return [[[NSUserDefaults alloc] initWithSuiteName:STORE_NAME] stringForKey:key];
 }
 
-+ (NSString *) infoPListStringForKey:(NSString *)key {
++ (NSString *)infoPListStringForKey:(NSString *)key {
   return [[NSBundle mainBundle] objectForInfoDictionaryKey:[NSString stringWithFormat:@"%@.%@", STORE_NAME, key]];
 }
 
-+ (BOOL) infoPListBoolForKey:(NSString *)key {
++ (BOOL)infoPListBoolForKey:(NSString *)key {
   return [[[NSBundle mainBundle] objectForInfoDictionaryKey:[NSString stringWithFormat:@"%@.%@", STORE_NAME, key]] boolValue];
 }
 
-+ (EMSConfig *) getEMSConfig {
++ (EMSConfig *)getEMSConfig {
   return [EMSConfig makeWithBuilder:^(EMSConfigBuilder *builder) {
     [builder setMobileEngageApplicationCode:[self stringForKey:@"applicationCode"]];
     [builder setMerchantId:[self stringForKey:@"merchantId"]];
@@ -32,7 +32,7 @@
   }];
 }
 
-+ (void) setUserDefaultsString:(NSString *)value forKey:(NSString *)key {
++ (void)setUserDefaultsString:(NSString *)value forKey:(NSString *)key {
   [[[NSUserDefaults alloc] initWithSuiteName:STORE_NAME] setObject:value forKey: key];
 }
 

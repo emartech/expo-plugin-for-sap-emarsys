@@ -1,6 +1,5 @@
 import ExpoModulesCore
 import EmarsysSDK
-import RNEmarsysWrapper
 
 public class EmarsysAppDelegateSubscriber: ExpoAppDelegateSubscriber {
 
@@ -9,8 +8,7 @@ public class EmarsysAppDelegateSubscriber: ExpoAppDelegateSubscriber {
     Emarsys.setup(config: config)
 
     UNUserNotificationCenter.current().delegate = Emarsys.push
-    let rnEmarsysEventHandler = RNEmarsysEventHandler()
-    rnEmarsysEventHandler.setEventHandlers()
+    EventUtils.setEventHandler(nil)
 
     return true
   }
