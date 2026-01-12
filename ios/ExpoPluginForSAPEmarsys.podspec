@@ -26,7 +26,6 @@ Pod::Spec.new do |s|
   install_modules_dependencies(s)
   s.dependency 'ExpoModulesCore'
   s.dependency 'EmarsysSDK', '~> 3.9.0'
-  s.dependency 'RNEmarsysWrapper'
 
   s.source_files = '**/*.{h,m,mm,swift,hpp,cpp}'
 end

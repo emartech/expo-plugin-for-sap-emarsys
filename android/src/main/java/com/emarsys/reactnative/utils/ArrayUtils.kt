@@ -24,7 +24,7 @@ object ArrayUtils {
     val writableArray = Arguments.createArray()
     for (i in 0 until jsonArray.length()) {
       try {
-        val value = jsonArray.get(i)
+        val value = jsonArray.opt(i)
 
         if (value is String) {
           writableArray.pushString(jsonArray.getString(i))
