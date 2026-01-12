@@ -128,7 +128,6 @@ describe('withPushMessageLogoIcon', () => {
         '/test/project/assets/mobile_engage_logo_icon.jpg',
         '/test/project/android/app/src/main/res/drawable/mobile_engage_logo_icon.jpg'
       );
-      expect(mockConsoleLog).toHaveBeenCalledWith('Copied mobile_engage_logo_icon to /test/project/android/app/src/main/res/drawable/mobile_engage_logo_icon.jpg');
       // Function should return some config object
       expect(result).toBeDefined();
     });
@@ -302,7 +301,6 @@ describe('withPushMessageLogoIcon', () => {
 
       // Verify file operations
       expect(mockFs.copyFileSync).toHaveBeenCalled();
-      expect(mockConsoleLog).toHaveBeenCalledWith('Copied mobile_engage_logo_icon to /test/project/android/app/src/main/res/drawable/mobile_engage_logo_icon.jpg');
       
       // Verify manifest modifications
       expect(setMetaData).toHaveBeenCalledWith(

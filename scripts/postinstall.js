@@ -1,31 +1,37 @@
 const fs = require('fs').promises;
 
 (async () => {
-  // copy podspec for react native
+  // Copy podspec for react native
   let podspec = await fs.readFile('ios/ExpoPluginForSAPEmarsys.podspec', { encoding: 'utf8' });
   podspec = podspec.replace("'..', 'package.json'", "'package.json'");
   podspec = podspec.replace("s.dependency 'ExpoModulesCore'", "");
   podspec = podspec.replace("s.source_files = '", "s.source_files = 'ios/");
   await fs.writeFile('ExpoPluginForSAPEmarsys.podspec', podspec);
 
+  // Check if expo exist
+  let expoExist = true;
   try {
-    // check if expo exist
-    require("expo/package.json");
-    require("expo-modules-core/package.json");
-
+    require('expo/package.json');
+    require('expo-modules-core/package.json');
+    expoExist = true;
   // eslint-disable-next-line no-unused-vars
   } catch (error) {
-    // expo not exist
-
-    // remove expo plugin from build.gradle
-    let buildGradle = await fs.readFile('android/build.gradle', { encoding: 'utf8' });
-    buildGradle = buildGradle.replace(/\/\/ expo plugin - START[\s\S]*\/\/ expo plugin - END/m, '');
-    await fs.writeFile('android/build.gradle', buildGradle);
-
-    // remove expo plugin files
-    await fs.writeFile('android/src/main/java/com/emarsys/reactnative/expo/EmarsysPackage.kt', '');
-    await fs.writeFile('android/src/main/java/com/emarsys/reactnative/expo/EmarsysApplicationLifecycleListener.kt', '');
-    await fs.writeFile('ios/expo/EmarsysAppDelegateSubscriber.swift', '');
-
+    expoExist = false;
   }
+
+  // Enable/disable expo plugin files
+  const expoPluginFiles = [
+    'android/build.gradle',
+    'android/src/main/java/com/emarsys/reactnative/expo/EmarsysPackage.kt',
+    'android/src/main/java/com/emarsys/reactnative/expo/EmarsysApplicationLifecycleListener.kt',
+    'ios/expo/EmarsysAppDelegateSubscriber.swift'
+  ];
+  const enableStart = '// Expo plugin - START';
+  const disableStart = '/* Expo plugin - START';
+  for (let file of expoPluginFiles) {
+    let content = await fs.readFile(file, { encoding: 'utf8' });
+    content = expoExist ? content.replace(disableStart, enableStart) : content.replace(enableStart, disableStart);
+    await fs.writeFile(file, content);
+  }
+
 })();

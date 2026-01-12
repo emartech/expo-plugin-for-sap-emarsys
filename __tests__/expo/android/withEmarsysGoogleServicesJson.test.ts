@@ -86,7 +86,6 @@ describe('withGoogleServicesJson', () => {
       '/test/project/assets/google-services.json',
       '/test/project/android/app/google-services.json'
     );
-    expect(mockConsoleLog).toHaveBeenCalledWith('Copied google-services.json to /test/project/android/app/google-services.json');
     expect(result).toBe(mockConfig);
   });
 

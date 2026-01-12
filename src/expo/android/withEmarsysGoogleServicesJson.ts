@@ -1,8 +1,4 @@
-import {
-  ConfigPlugin,
-  withDangerousMod
-} from 'expo/config-plugins';
-
+import { ConfigPlugin, withDangerousMod } from 'expo/config-plugins';
 
 export const withEmarsysGoogleServicesJson: ConfigPlugin = (config) => {
   return withDangerousMod(config, [
@@ -21,9 +17,7 @@ export const withEmarsysGoogleServicesJson: ConfigPlugin = (config) => {
       }
 
       fs.mkdirSync(path.dirname(dest), { recursive: true });
-
       fs.copyFileSync(source, dest);
-      console.log(`Copied google-services.json to ${dest}`);
 
       return config;
     },

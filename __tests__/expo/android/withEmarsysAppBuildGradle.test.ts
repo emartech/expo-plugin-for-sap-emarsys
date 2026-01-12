@@ -1,7 +1,5 @@
 import { ExpoConfig } from 'expo/config';
-import {
-  withEmarsysAppBuildGradle
-} from '../../../src/expo/android/withEmarsysAppBuildGradle';
+import { withEmarsysAppBuildGradle } from '../../../src/expo/android/withEmarsysAppBuildGradle';
 
 // Mock the expo/config-plugins module
 jest.mock('expo/config-plugins', () => ({

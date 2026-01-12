@@ -1,7 +1,4 @@
-import {
-  ConfigPlugin,
-  withProjectBuildGradle
-} from 'expo/config-plugins';
+import { ConfigPlugin, withProjectBuildGradle } from 'expo/config-plugins';
 
 const GOOGLE_SERVICES_CLASSPATH = "classpath('com.google.gms:google-services:4.4.4')";
 

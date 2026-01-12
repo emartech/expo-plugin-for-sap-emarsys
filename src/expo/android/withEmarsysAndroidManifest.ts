@@ -1,10 +1,7 @@
-import {
-  ConfigPlugin,
-  withAndroidManifest
-} from 'expo/config-plugins';
-import { EMSOptions } from '../../types';
-import { STORE_NAME } from '../../constants';
+import { ConfigPlugin, withAndroidManifest } from 'expo/config-plugins';
+import { type EMSOptions } from '../withEmarsysPlugin';
 import { setMetaData, addEmarsysMessagingService } from './withEmarsysAndroidHelpers';
+import { STORE_NAME } from '../../constants';
 
 export const withEmarsysAndroidManifest: ConfigPlugin<EMSOptions> = (config, options) =>
   withAndroidManifest(config, config => {

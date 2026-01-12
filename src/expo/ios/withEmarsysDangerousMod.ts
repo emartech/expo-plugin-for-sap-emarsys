@@ -1,8 +1,5 @@
-import {
-  ConfigPlugin,
-  withDangerousMod
-} from 'expo/config-plugins';
-import { EMSOptions } from '../../types';
+import { ConfigPlugin, withDangerousMod } from 'expo/config-plugins';
+import { type EMSOptions } from '../withEmarsysPlugin';
 
 const NOTIFICATION_SERVICE_TARGET = 'NotificationService';
 const NOTIFICATION_SERVICE_FILES = [
