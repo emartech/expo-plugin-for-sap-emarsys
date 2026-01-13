@@ -12,6 +12,7 @@ class EmarsysPackage : BaseReactPackage() {
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? =
     when (name) {
       NativeEmarsys.NAME -> NativeEmarsys(reactContext)
+      NativeEmarsysPush.NAME -> NativeEmarsysPush(reactContext)
       NativeEmarsysConfig.NAME -> NativeEmarsysConfig(reactContext)
       else -> null
     }
@@ -21,6 +22,14 @@ class EmarsysPackage : BaseReactPackage() {
       NativeEmarsys.NAME to ReactModuleInfo(
         name = NativeEmarsys.NAME,
         className = NativeEmarsys.NAME,
+        canOverrideExistingModule = false,
+        needsEagerInit = false,
+        isCxxModule = false,
+        isTurboModule = true
+      ),
+      NativeEmarsysPush.NAME to ReactModuleInfo(
+        name = NativeEmarsysPush.NAME,
+        className = NativeEmarsysPush.NAME,
         canOverrideExistingModule = false,
         needsEagerInit = false,
         isCxxModule = false,
