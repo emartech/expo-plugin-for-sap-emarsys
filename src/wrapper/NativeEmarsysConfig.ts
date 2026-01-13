@@ -1,8 +1,8 @@
 import { TurboModuleRegistry, type TurboModule } from 'react-native';
 
 export interface Spec extends TurboModule {
-  changeApplicationCode(applicationCode: string): Promise<void>;
-  changeMerchantId(merchantId: string): Promise<void>;
+  changeApplicationCode(applicationCode?: string | null): Promise<void>;
+  changeMerchantId(merchantId?: string | null): Promise<void>;
   getApplicationCode(): Promise<string>;
   getMerchantId(): Promise<string>;
   getContactFieldId(): Promise<string>;

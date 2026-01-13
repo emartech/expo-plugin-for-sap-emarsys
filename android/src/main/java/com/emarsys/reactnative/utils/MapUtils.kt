@@ -1,12 +1,37 @@
 package com.emarsys.reactnative.utils
 
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.bridge.UnexpectedNativeTypeException
 import com.facebook.react.bridge.WritableMap
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
 object MapUtils {
+
+  fun toMap(readableMap: ReadableMap?) : Map<String, String>? {
+    if (readableMap == null) {
+      return null
+    }
+
+    val map = mutableMapOf<String, String>()
+    val iterator = readableMap.keySetIterator()
+    while (iterator.hasNextKey()) {
+      try {
+        val key = iterator.nextKey()
+        val value = readableMap.getString(key)
+        
+        if (value != null) {
+          map[key] = value
+        }
+      } catch (e: UnexpectedNativeTypeException) {
+        e.printStackTrace()
+      }
+    }
+
+    return map
+  }
 
   fun toWritableMap(jsonObject: JSONObject?): WritableMap? {
     if (jsonObject == null) {

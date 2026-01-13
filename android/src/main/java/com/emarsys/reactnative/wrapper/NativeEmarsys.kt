@@ -6,6 +6,7 @@ import com.emarsys.reactnative.utils.EventUtils
 import com.emarsys.reactnative.utils.MapUtils
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReadableMap
 import org.json.JSONObject
 
 class NativeEmarsys(reactContext: ReactApplicationContext) : NativeEmarsysSpec(reactContext) {
@@ -22,4 +23,66 @@ class NativeEmarsys(reactContext: ReactApplicationContext) : NativeEmarsysSpec(r
     }
     promise.resolve(null)
   }
+
+  override fun setContact(contactFieldId: Double, contactFieldValue: String, promise: Promise) {
+    try {
+      Emarsys.setContact(contactFieldId.toInt(), contactFieldValue) { errorCause: Throwable? ->
+        if (errorCause == null) {
+          promise.resolve(null)
+        } else {
+          promise.reject(NAME, "setContact", errorCause)
+        }
+      }
+    } catch (e: Exception) {
+      promise.reject(NAME, "setContact", e)
+    }
+  }
+
+  override fun clearContact(promise: Promise) {
+    try {
+      Emarsys.clearContact { errorCause: Throwable? ->
+        if (errorCause == null) {
+          promise.resolve(null)
+        } else {
+          promise.reject(NAME, "clearContact", errorCause)
+        }
+      }
+    } catch (e: Exception) {
+      promise.reject(NAME, "clearContact", e)
+    }
+  }
+
+  override fun trackCustomEvent(eventName: String, eventAttributes: ReadableMap?, promise: Promise) {
+    try {
+      Emarsys.trackCustomEvent(eventName, MapUtils.toMap(eventAttributes)) { errorCause: Throwable? ->
+        if (errorCause == null) {
+          promise.resolve(null)
+        } else {
+          promise.reject(NAME, "trackCustomEvent", errorCause)
+        }
+      }
+    } catch (e: Exception) {
+      promise.reject(NAME, "trackCustomEvent", e)
+    }
+  }
+
+  override fun trackDeepLink(url: String, promise: Promise) {
+    try {
+      val activity = currentActivity
+      val intent = activity?.intent
+      val uri = intent?.data.toString()
+      if (activity != null && intent != null && uri == url) {
+        Emarsys.trackDeepLink(activity, intent) { errorCause: Throwable? ->
+          if (errorCause == null) {
+            promise.resolve(null)
+          } else {
+            promise.reject(NAME, "trackDeepLink", errorCause)
+          }
+        }
+      }
+    } catch (e: Exception) {
+      promise.reject(NAME, "trackDeepLink", e)
+    }
+  }
+
 }

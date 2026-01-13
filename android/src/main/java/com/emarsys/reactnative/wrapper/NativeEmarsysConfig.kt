@@ -16,15 +16,15 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
   override fun changeApplicationCode(applicationCode: String, promise: Promise) {
     try {
       Emarsys.config.changeApplicationCode(applicationCode) { errorCause ->
-        if (errorCause != null) {
-          promise.reject(NAME, "Error changeApplicationCode: ", errorCause)
-        } else {
+        if (errorCause == null) {
           StorageUtils.setSharedPreferencesString(reactApplicationContext, "applicationCode", applicationCode ?: "")
           promise.resolve(null)
+        } else {
+          promise.reject(NAME, "changeApplicationCode", errorCause)
         }
       }
     } catch (e: Exception) {
-      promise.reject(NAME, "Error changeApplicationCode: ", e)
+      promise.reject(NAME, "changeApplicationCode", e)
     }
   }
 
@@ -34,7 +34,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
       StorageUtils.setSharedPreferencesString(reactApplicationContext, "merchantId", merchantId ?: "")
       promise.resolve(null)
     } catch (e: Exception) {
-      promise.reject(NAME, "Error changeMerchantId: ", e)
+      promise.reject(NAME, "changeMerchantId", e)
     }
   }
 
@@ -43,7 +43,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
       val applicationCode = Emarsys.config.applicationCode
       promise.resolve(applicationCode)
     } catch (e: Exception) {
-      promise.reject(NAME, "Error getApplicationCode: ", e)
+      promise.reject(NAME, "getApplicationCode", e)
     }
   }
 
@@ -52,7 +52,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
       val merchantId = Emarsys.config.merchantId
       promise.resolve(merchantId)
     } catch (e: Exception) {
-      promise.reject(NAME, "Error getMerchantId: ", e)
+      promise.reject(NAME, "getMerchantId", e)
     }
   }
 
@@ -61,7 +61,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
       val contactFieldId = Emarsys.config.contactFieldId
       promise.resolve(contactFieldId)
     } catch (e: Exception) {
-      promise.reject(NAME, "Error getContactFieldId: ", e)
+      promise.reject(NAME, "getContactFieldId", e)
     }
   }
 
@@ -70,7 +70,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
       val clientId = Emarsys.config.clientId
       promise.resolve(clientId)
     } catch (e: Exception) {
-      promise.reject(NAME, "Error getClientId: ", e)
+      promise.reject(NAME, "getClientId", e)
     }
   }
 
@@ -79,7 +79,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
       val languageCode = Emarsys.config.languageCode
       promise.resolve(languageCode)
     } catch (e: Exception) {
-      promise.reject(NAME, "Error getLanguageCode: ", e)
+      promise.reject(NAME, "getLanguageCode", e)
     }
   }
 
@@ -88,7 +88,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
       val sdkVersion = Emarsys.config.sdkVersion
       promise.resolve(sdkVersion)
     } catch (e: Exception) {
-      promise.reject(NAME, "Error getSdkVersion: ", e)
+      promise.reject(NAME, "getSdkVersion", e)
     }
   }
 }
