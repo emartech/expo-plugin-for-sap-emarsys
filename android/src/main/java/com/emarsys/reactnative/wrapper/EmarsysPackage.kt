@@ -10,10 +10,10 @@ import com.facebook.react.uimanager.ViewManager
 class EmarsysPackage : BaseReactPackage() {
 
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? =
-    if (name == NativeEmarsys.NAME) {
-      NativeEmarsys(reactContext)
-    } else {
-      null
+    when (name) {
+      NativeEmarsys.NAME -> NativeEmarsys(reactContext)
+      NativeEmarsysConfig.NAME -> NativeEmarsysConfig(reactContext)
+      else -> null
     }
 
   override fun getReactModuleInfoProvider() = ReactModuleInfoProvider {
@@ -21,6 +21,14 @@ class EmarsysPackage : BaseReactPackage() {
       NativeEmarsys.NAME to ReactModuleInfo(
         name = NativeEmarsys.NAME,
         className = NativeEmarsys.NAME,
+        canOverrideExistingModule = false,
+        needsEagerInit = false,
+        isCxxModule = false,
+        isTurboModule = true
+      ),
+      NativeEmarsysConfig.NAME to ReactModuleInfo(
+        name = NativeEmarsysConfig.NAME,
+        className = NativeEmarsysConfig.NAME,
         canOverrideExistingModule = false,
         needsEagerInit = false,
         isCxxModule = false,

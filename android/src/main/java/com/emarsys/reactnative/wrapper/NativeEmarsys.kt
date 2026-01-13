@@ -22,23 +22,4 @@ class NativeEmarsys(reactContext: ReactApplicationContext) : NativeEmarsysSpec(r
     }
     promise.resolve(null)
   }
-
-  override fun getClientId(promise: Promise) {
-    try {
-      val clientId = Emarsys.config.clientId
-      promise.resolve(clientId)
-    } catch (e: Exception) {
-      promise.reject(NAME, "Error getClientId: ", e)
-    }
-  }
-
-  override fun getSdkVersion(promise: Promise) {
-    try {
-      val sdkVersion = Emarsys.config.sdkVersion
-      promise.resolve(sdkVersion)
-    } catch (e: Exception) {
-      promise.reject(NAME, "Error getSdkVersion: ", e)
-    }
-  }
-
 }

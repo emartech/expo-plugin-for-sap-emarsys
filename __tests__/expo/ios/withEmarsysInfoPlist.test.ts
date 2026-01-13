@@ -1,6 +1,6 @@
 import { ExpoConfig } from 'expo/config';
-import { withEmarsysInfoPlist } from '../../src/expo/ios/withEmarsysInfoPlist';
-import { EMSOptions } from '../../src/types';
+import { withEmarsysInfoPlist } from '../../../src/expo/ios/withEmarsysInfoPlist';
+import { EMSOptions } from '../../../src/types';
 
 // Mock the expo/config-plugins module
 jest.mock('expo/config-plugins', () => ({

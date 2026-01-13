@@ -1,6 +1,6 @@
 import { ExpoConfig } from 'expo/config';
-import { withEmarsysDangerousMod } from '../../src/expo/ios/withEmarsysDangerousMod';
-import { EMSOptions } from '../../src/types';
+import { withEmarsysDangerousMod } from '../../../src/expo/ios/withEmarsysDangerousMod';
+import { EMSOptions } from '../../../src/types';
 
 // Mock the expo/config-plugins module
 jest.mock('expo/config-plugins', () => ({
