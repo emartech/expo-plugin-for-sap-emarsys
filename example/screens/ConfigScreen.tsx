@@ -50,6 +50,9 @@ export default function ConfigScreen() {
       <Button title="Get SDK Version" action={async () => {
         return await Emarsys.config.getSdkVersion();
       }} printResult />
+      <Button title="Get RN Plugin Version" action={async () => {
+        return await Emarsys.config.getRNPluginVersion();
+      }} printResult />
 
     </ScrollView>
   );

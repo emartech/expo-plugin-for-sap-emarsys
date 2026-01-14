@@ -101,4 +101,8 @@ RCT_EXPORT_MODULE()
   }
 }
 
+- (void)getRNPluginVersion:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+  // Overriden and implemented in index.ts
+}
+
 @end

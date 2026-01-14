@@ -22,12 +22,12 @@ describe('NativeEmarsys', () => {
 
   describe('onEvent', () => {
     it('should call onEvent', async () => {
-      (mockConfig.onEvent as jest.Mock).mockReturnValue("result");
+      (mockConfig.onEvent as jest.Mock).mockReturnValue('result');
 
       const result = mockConfig.onEvent(() => {});
 
       expect(mockConfig.onEvent).toHaveBeenCalledTimes(1);
-      expect(result).toBe("result");
+      expect(result).toBe('result');
     });
   });
 

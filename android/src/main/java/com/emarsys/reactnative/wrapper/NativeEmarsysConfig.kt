@@ -91,4 +91,9 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
       promise.reject(NAME, "getSdkVersion", e)
     }
   }
+
+  override fun getRNPluginVersion(promise: Promise) {
+    // Overriden and implemented in index.ts
+  }
+
 }
