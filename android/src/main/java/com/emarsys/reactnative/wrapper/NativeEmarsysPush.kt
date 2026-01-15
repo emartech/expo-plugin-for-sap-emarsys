@@ -15,28 +15,28 @@ class NativeEmarsysPush(reactContext: ReactApplicationContext) : NativeEmarsysPu
   override fun setPushToken(pushToken: String, promise: Promise) {
     try {
       Emarsys.push.setPushToken(pushToken) { errorCause ->
-        if (errorCause != null) {
-          promise.reject(NAME, "Error setPushToken: ", errorCause)
-        } else {
+        if (errorCause == null) {
           promise.resolve(null)
+        } else {
+          promise.reject(NAME, "setPushToken", errorCause)
         }
       }
     } catch (e: Exception) {
-      promise.reject(NAME, "Error setPushToken: ", e)
+      promise.reject(NAME, "setPushToken", e)
     }
   }
 
   override fun clearPushToken(promise: Promise) {
     try {
       Emarsys.push.clearPushToken { errorCause ->
-        if (errorCause != null) {
-          promise.reject(NAME, "Error clearPushToken: ", errorCause)
-        } else {
+        if (errorCause == null) {
           promise.resolve(null)
+        } else {
+          promise.reject(NAME, "clearPushToken", errorCause)
         }
       }
     } catch (e: Exception) {
-      promise.reject(NAME, "Error clearPushToken: ", e)
+      promise.reject(NAME, "clearPushToken", e)
     }
   }
 
@@ -45,7 +45,7 @@ class NativeEmarsysPush(reactContext: ReactApplicationContext) : NativeEmarsysPu
       val pushToken = Emarsys.push.pushToken
       promise.resolve(pushToken)
     } catch (e: Exception) {
-      promise.reject(NAME, "Error getPushToken: ", e)
+      promise.reject(NAME, "getPushToken", e)
     }
   }
 }

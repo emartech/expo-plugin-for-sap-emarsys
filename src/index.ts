@@ -1,8 +1,9 @@
 import type { EventSubscription } from 'react-native';
+import './wrapper';
 import NativeEmarsys, { type Event } from './wrapper/NativeEmarsys';
-import NativeEmarsysConfig from './wrapper/NativeEmarsysConfig';
 import NativeEmarsysPush from './wrapper/NativeEmarsysPush';
 import InlineInAppView, { Commands as InlineInAppViewCommands } from './wrapper/InlineInAppViewNativeComponent';
+import NativeEmarsysConfig from './wrapper/NativeEmarsysConfig';
 
 NativeEmarsysConfig.getRNPluginVersion = () => {
   return require('../package.json').version;
@@ -19,26 +20,10 @@ export default {
   trackCustomEvent: NativeEmarsys.trackCustomEvent,
   trackDeepLink: NativeEmarsys.trackDeepLink,
 
-  config: NativeEmarsysConfig,
   push: NativeEmarsysPush,
   InlineInAppView,
-  InlineInApp: InlineInAppViewCommands
+  InlineInApp: InlineInAppViewCommands,
+  config: NativeEmarsysConfig,
 };
 
-// Track wrapper:init
-(async () => {
-  const version = require('../package.json').version;
-  let frameworkVersion = require('react-native/package.json').version;
-  let type = 'react-native';
-
-  // Check if expo exist
-  try {
-    frameworkVersion = require('expo/package.json').version;
-    type = 'expo';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
-    // No expo
-  }
-
-  NativeEmarsys.trackCustomEvent('wrapper:init', { type, version, frameworkVersion });
-})();
+export { type Event };

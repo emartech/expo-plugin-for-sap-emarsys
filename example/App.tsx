@@ -3,7 +3,7 @@ import { EventSubscription } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import Emarsys from 'expo-plugin-for-sap-emarsys';
+import Emarsys, { type Event } from 'expo-plugin-for-sap-emarsys';
 import ConfigScreen from './screens/ConfigScreen';
 import PushScreen from './screens/PushScreen';
 import InAppScreen from './screens/InAppScreen';
@@ -15,7 +15,7 @@ export default function App() {
   const eventHandlerSubscription = useRef<EventSubscription | null>(null);
 
   useEffect(() => {
-    eventHandlerSubscription.current = Emarsys.setEventHandler((event) => {
+    eventHandlerSubscription.current = Emarsys.setEventHandler((event: Event) => {
       console.log(`Event: ${event.name}:`, event.payload);
     });
 

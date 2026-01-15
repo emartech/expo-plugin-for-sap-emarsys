@@ -2,7 +2,7 @@
 
 @interface StringUtils : NSObject
 
-+ (NSData *)dataWithString:(NSString *)deviceToken;
-+ (NSString *)stringWithData:(NSData *)deviceToken;
++ (NSData *)dataWithDeviceToken:(NSString *)deviceToken;
++ (NSString *)stringWithDeviceToken:(NSData *)deviceToken;
 
 @end

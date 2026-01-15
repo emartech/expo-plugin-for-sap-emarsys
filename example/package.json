@@ -16,7 +16,6 @@
     "expo-plugin-for-sap-emarsys": "file:../",
     "react": "19.0.0",
     "react-native": "0.79.5",
-    "react-native-emarsys-wrapper": "github:emartech/react-native-emarsys-sdk",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0"
   },

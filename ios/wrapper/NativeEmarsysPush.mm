@@ -1,13 +1,15 @@
-#import <Foundation/Foundation.h>
-#import <NativeEmarsys/NativeEmarsys.h>
 #import <EmarsysSDK/Emarsys.h>
+#import <NativeEmarsys/NativeEmarsys.h>
 #import "StringUtils.h"
+
+#define NAME @"NativeEmarsysPush"
 
 @interface NativeEmarsysPush : NSObject <NativeEmarsysPushSpec>
 
 @end
 
 @implementation NativeEmarsysPush
+
 RCT_EXPORT_MODULE()
 
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const facebook::react::ObjCTurboModule::InitParams &)params {
@@ -16,31 +18,29 @@ RCT_EXPORT_MODULE()
 
 - (void)setPushToken:(NSString *)pushToken resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
-    NSData *tokenData = [StringUtils dataWithString:pushToken];
-    [Emarsys.push setPushToken:tokenData completionBlock:^(NSError * _Nullable error) {
-      if (NULL != error) {
-        reject(@"Error NativeEmarsysPush", @"setPushToken: ", error);
-      } else {
+    NSData *pushTokenData = [StringUtils dataWithDeviceToken:pushToken];
+    [Emarsys.push setPushToken:pushTokenData completionBlock:^(NSError *error) {
+      if (error == nil) {
         resolve(nil);
+      } else {
+        reject(NAME, @"setPushToken", error);
       }
     }];
-  }
-  @catch (NSException *exception) {
+  } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);
   }
 }
 
 - (void)clearPushToken:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
-    [Emarsys.push clearPushTokenWithCompletionBlock:^(NSError * _Nullable error) {
-      if (NULL != error) {
-        reject(@"Error NativeEmarsysPush", @"clearPushToken: ", error);
-      } else {
+    [Emarsys.push clearPushTokenWithCompletionBlock:^(NSError *error) {
+      if (error == nil) {
         resolve(nil);
+      } else {
+        reject(NAME, @"clearPushToken", error);
       }
     }];
-  }
-  @catch (NSException *exception) {
+  } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);
   }
 }
@@ -48,10 +48,9 @@ RCT_EXPORT_MODULE()
 - (void)getPushToken:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
     NSData *pushTokenData = [Emarsys.push pushToken];
-    NSString * pushToken = [StringUtils stringWithData:pushTokenData];
+    NSString * pushToken = [StringUtils stringWithDeviceToken:pushTokenData];
     resolve(pushToken);
-  }
-  @catch (NSException *exception) {
+  } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);
   }
 }

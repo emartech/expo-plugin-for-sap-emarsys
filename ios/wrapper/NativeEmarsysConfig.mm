@@ -1,6 +1,5 @@
-#import <Foundation/Foundation.h>
-#import <NativeEmarsys/NativeEmarsys.h>
 #import <EmarsysSDK/Emarsys.h>
+#import <NativeEmarsys/NativeEmarsys.h>
 #import "StorageUtils.h"
 
 #define NAME @"NativeEmarsysConfig"

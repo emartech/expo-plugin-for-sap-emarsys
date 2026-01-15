@@ -13,7 +13,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
 
   override fun getName() = NAME
 
-  override fun changeApplicationCode(applicationCode: String, promise: Promise) {
+  override fun changeApplicationCode(applicationCode: String?, promise: Promise) {
     try {
       Emarsys.config.changeApplicationCode(applicationCode) { errorCause ->
         if (errorCause == null) {
@@ -28,7 +28,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
     }
   }
 
-  override fun changeMerchantId(merchantId: String, promise: Promise) {
+  override fun changeMerchantId(merchantId: String?, promise: Promise) {
     try {
       Emarsys.config.changeMerchantId(merchantId) // changeMerchantId has no callback
       StorageUtils.setSharedPreferencesString(reactApplicationContext, "merchantId", merchantId ?: "")
