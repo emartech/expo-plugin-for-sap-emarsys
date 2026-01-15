@@ -15,7 +15,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
 
   override fun changeApplicationCode(applicationCode: String?, promise: Promise) {
     try {
-      Emarsys.config.changeApplicationCode(applicationCode) { errorCause ->
+      Emarsys.config.changeApplicationCode(applicationCode) { errorCause: Throwable? ->
         if (errorCause == null) {
           StorageUtils.setSharedPreferencesString(reactApplicationContext, "applicationCode", applicationCode ?: "")
           promise.resolve(null)

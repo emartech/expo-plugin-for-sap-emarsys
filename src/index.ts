@@ -3,6 +3,7 @@ import './wrapper';
 import NativeEmarsys, { type Event } from './wrapper/NativeEmarsys';
 import NativeEmarsysPush from './wrapper/NativeEmarsysPush';
 import NativeEmarsysInApp from './wrapper/NativeEmarsysInApp';
+import NativeEmarsysInbox from './wrapper/NativeEmarsysInbox';
 import InlineInAppView, { Commands as InlineInAppCommands } from './wrapper/InlineInAppViewNativeComponent';
 import type { Event as InlineInAppEvent, Completion as InlineInAppCompletion, Close as InlineInAppClose } from './wrapper/InlineInAppViewNativeComponent';
 import NativeEmarsysConfig from './wrapper/NativeEmarsysConfig';
@@ -24,6 +25,7 @@ export default {
 
   push: NativeEmarsysPush,
   inApp: NativeEmarsysInApp,
+  inbox: NativeEmarsysInbox,
   InlineInAppView,
   InlineInApp: InlineInAppCommands,
   config: NativeEmarsysConfig,

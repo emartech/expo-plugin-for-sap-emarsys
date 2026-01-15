@@ -13,6 +13,7 @@ class EmarsysPackage : BaseReactPackage() {
     NativeEmarsys.NAME,
     NativeEmarsysPush.NAME,
     NativeEmarsysInApp.NAME,
+    NativeEmarsysInbox.NAME,
     NativeEmarsysConfig.NAME,
   )
 
@@ -21,6 +22,7 @@ class EmarsysPackage : BaseReactPackage() {
       NativeEmarsys.NAME -> NativeEmarsys(reactContext)
       NativeEmarsysPush.NAME -> NativeEmarsysPush(reactContext)
       NativeEmarsysInApp.NAME -> NativeEmarsysInApp(reactContext)
+      NativeEmarsysInbox.NAME -> NativeEmarsysInbox(reactContext)
       NativeEmarsysConfig.NAME -> NativeEmarsysConfig(reactContext)
       else -> null
     }

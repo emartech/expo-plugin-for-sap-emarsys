@@ -40,6 +40,19 @@ export default function PushScreen() {
 
       <Separator />
 
+      <Button title="Inbox Fetch Messages" printResult={true} action={async () => {
+        const messages = await Emarsys.inbox.fetchMessages();
+        return JSON.stringify(messages, null, 2);
+      }} />
+
+      <Button title="Inbox Add Tag" action={async () => {
+        await Emarsys.inbox.addTag('seen', '21991043375');
+      }} />
+
+      <Button title="Inbox Remove Tag" action={async () => {
+        await Emarsys.inbox.removeTag('seen', '21991043375');
+      }} />
+
     </ScrollView>
   );
 }

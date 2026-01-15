@@ -14,7 +14,7 @@ class NativeEmarsysPush(reactContext: ReactApplicationContext) : NativeEmarsysPu
 
   override fun setPushToken(pushToken: String, promise: Promise) {
     try {
-      Emarsys.push.setPushToken(pushToken) { errorCause ->
+      Emarsys.push.setPushToken(pushToken) { errorCause: Throwable? ->
         if (errorCause == null) {
           promise.resolve(null)
         } else {
@@ -28,7 +28,7 @@ class NativeEmarsysPush(reactContext: ReactApplicationContext) : NativeEmarsysPu
 
   override fun clearPushToken(promise: Promise) {
     try {
-      Emarsys.push.clearPushToken { errorCause ->
+      Emarsys.push.clearPushToken { errorCause: Throwable? ->
         if (errorCause == null) {
           promise.resolve(null)
         } else {
