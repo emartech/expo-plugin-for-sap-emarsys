@@ -1,4 +1,4 @@
-import { ScrollView as RNScrollView, Pressable, Text, View, StyleSheet } from 'react-native';
+import { ScrollView as RNScrollView, Pressable, Text, Alert as RNAlert, View, StyleSheet } from 'react-native';
 
 export function ScrollView({ children }: { children: React.ReactNode }) {
   return (
@@ -8,23 +8,34 @@ export function ScrollView({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function Button({ title, action, printResult = false }: { title: string; action: () => Promise<any>, printResult?: boolean }) {
+export function Button({ title, action, printResult = false }: { title: string, action: () => Promise<any>, printResult?: boolean }) {
   return (
     <Pressable onPress={async () => {
       try {
         const result = await action();
         if (printResult) {
-          console.log(`${title} done:`, result);
+          Alert(title, `Done: ${result}`);
         } else {
-          console.log(`${title} done`);
+          Alert(title, 'Done');
         }
       } catch (e) {
-        console.log(`${title} error:`, JSON.stringify(e));
+        Alert(title, `Error: ${JSON.stringify(e)}`);
       }
     }} style={styles.button}>
       <Text style={styles.buttonText}>{title}</Text>
     </Pressable>
   );
+}
+
+const showLog = true;
+const showAlert = true;
+export function Alert(title: string, message: string) {
+  if (showLog) {
+    console.log(title, '-', message);
+  }
+  if (showAlert) {
+    RNAlert.alert(title, message, [{ text: 'OK' }]);
+  }
 }
 
 export function Separator() {

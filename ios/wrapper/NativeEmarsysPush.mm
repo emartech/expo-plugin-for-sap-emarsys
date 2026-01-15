@@ -48,7 +48,7 @@ RCT_EXPORT_MODULE()
 - (void)getPushToken:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
     NSData *pushTokenData = [Emarsys.push pushToken];
-    NSString * pushToken = [StringUtils stringWithDeviceToken:pushTokenData];
+    NSString *pushToken = [StringUtils stringWithDeviceToken:pushTokenData];
     resolve(pushToken);
   } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);

@@ -72,7 +72,7 @@ RCT_EXPORT_MODULE()
 - (void)trackDeepLink:(NSString *)url
   resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
-    NSUserActivity* userActivity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
+    NSUserActivity *userActivity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
     userActivity.webpageURL = [NSURL URLWithString:url];
     [Emarsys trackDeepLinkWithUserActivity:userActivity sourceHandler:^(NSString *source) {
       resolve(source);

@@ -12,6 +12,7 @@ class EmarsysPackage : BaseReactPackage() {
   val moduleNames = listOf(
     NativeEmarsys.NAME,
     NativeEmarsysPush.NAME,
+    NativeEmarsysInApp.NAME,
     NativeEmarsysConfig.NAME,
   )
 
@@ -19,6 +20,7 @@ class EmarsysPackage : BaseReactPackage() {
     when (name) {
       NativeEmarsys.NAME -> NativeEmarsys(reactContext)
       NativeEmarsysPush.NAME -> NativeEmarsysPush(reactContext)
+      NativeEmarsysInApp.NAME -> NativeEmarsysInApp(reactContext)
       NativeEmarsysConfig.NAME -> NativeEmarsysConfig(reactContext)
       else -> null
     }

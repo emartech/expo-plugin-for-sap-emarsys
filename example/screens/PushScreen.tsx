@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import Emarsys from 'expo-plugin-for-sap-emarsys';
-import { ScrollView, Button } from '../components';
+import { ScrollView, Button, Alert } from '../components';
 
 export default function PushScreen() {
   return (
@@ -42,6 +42,6 @@ async function requestPushPermission() {
       Notifications.getDevicePushTokenAsync();
     }
   } else {
-    console.log('Push permission denied');
+    Alert('Request Push Permission', 'Push permission denied');
   }
 }

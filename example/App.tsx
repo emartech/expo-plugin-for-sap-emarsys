@@ -8,6 +8,7 @@ import ConfigScreen from './screens/ConfigScreen';
 import PushScreen from './screens/PushScreen';
 import InAppScreen from './screens/InAppScreen';
 import PredictScreen from './screens/PredictScreen';
+import { Alert } from './components';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ export default function App() {
 
   useEffect(() => {
     eventHandlerSubscription.current = Emarsys.setEventHandler((event: Event) => {
-      console.log(`Event: ${event.name}:`, event.payload);
+      Alert('Event', `${event.name}: ${JSON.stringify(event.payload)}`);
     });
 
     return  () => {
