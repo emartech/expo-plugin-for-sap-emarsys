@@ -1,4 +1,17 @@
-import NativeEmarsys from './NativeEmarsys';
+import type { EventSubscription } from 'react-native';
+import NativeEmarsys, { type Event } from './NativeEmarsys';
+
+export default {
+  setEventHandler: (handler: (arg: Event) => void | Promise<void>): EventSubscription => {
+    const eventSubscription = NativeEmarsys.onEvent(handler);
+    NativeEmarsys.setEventHandler();
+    return eventSubscription;
+  },
+  setContact: NativeEmarsys.setContact,
+  clearContact: NativeEmarsys.clearContact,
+  trackCustomEvent: NativeEmarsys.trackCustomEvent,
+  trackDeepLink: NativeEmarsys.trackDeepLink,
+};
 
 // Track wrapper:init
 (async () => {

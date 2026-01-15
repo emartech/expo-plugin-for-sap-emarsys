@@ -4,7 +4,7 @@
 
 + (NSData *)dataWithDeviceToken:(NSString *)deviceToken {
   deviceToken = [deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
-  NSMutableData *data = [[NSMutableData alloc] init];
+  NSMutableData *data = [NSMutableData data];
   unsigned char whole_byte;
   char byte_chars[3] = {'\0','\0','\0'};
   for (int i = 0; i < ([deviceToken length] / 2); i++) {

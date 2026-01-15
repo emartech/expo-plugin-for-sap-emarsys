@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Emarsys from 'expo-plugin-for-sap-emarsys';
+import Emarsys, { InlineInAppView } from 'expo-plugin-for-sap-emarsys';
 import { ScrollView, Button, Alert, Separator } from '../components';
 
 export default function PushScreen() {
@@ -18,9 +18,10 @@ export default function PushScreen() {
         return await Emarsys.inApp.isPaused();
       }} printResult />
       <Button title="InApp Load Inline InApp" action={async () => {
-        Emarsys.InlineInApp.loadInApp(inlineInAppView.current, 'view-id');
+        const viewId = 'view-id';
+        Emarsys.inApp.loadInlineInApp(inlineInAppView.current, viewId);
       }} />
-      <Emarsys.InlineInAppView
+      <InlineInAppView
         ref={inlineInAppView}
         style={{ width: '100%', height: inlineInAppViewHeight }}
         onEvent={(event) => {

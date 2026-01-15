@@ -1,33 +1,23 @@
-import type { EventSubscription } from 'react-native';
-import './wrapper';
-import NativeEmarsys, { type Event } from './wrapper/NativeEmarsys';
+import NativeEmarsys from './wrapper';
 import NativeEmarsysPush from './wrapper/NativeEmarsysPush';
-import NativeEmarsysInApp from './wrapper/NativeEmarsysInApp';
-import InlineInAppView, { Commands as InlineInAppCommands } from './wrapper/InlineInAppViewNativeComponent';
-import type { Event as InlineInAppEvent, Completion as InlineInAppCompletion, Close as InlineInAppClose } from './wrapper/InlineInAppViewNativeComponent';
-import NativeEmarsysConfig from './wrapper/NativeEmarsysConfig';
-
-NativeEmarsysConfig.getRNPluginVersion = () => {
-  return require('../package.json').version;
-};
+import NativeEmarsysInApp from './wrapper/inApp';
+import NativeEmarsysPredict from './wrapper/NativeEmarsysPredict';
+import NativeEmarsysConfig from './wrapper/config';
 
 export default {
-  setEventHandler: (handler: (arg: Event) => void | Promise<void>): EventSubscription =>  {
-    const eventSubscription = NativeEmarsys.onEvent(handler);
-    NativeEmarsys.setEventHandler();
-    return eventSubscription;
-  },
-  setContact: NativeEmarsys.setContact,
-  clearContact: NativeEmarsys.clearContact,
-  trackCustomEvent: NativeEmarsys.trackCustomEvent,
-  trackDeepLink: NativeEmarsys.trackDeepLink,
-
+  ...NativeEmarsys,
   push: NativeEmarsysPush,
   inApp: NativeEmarsysInApp,
-  InlineInAppView,
-  InlineInApp: InlineInAppCommands,
+  predict: NativeEmarsysPredict,
   config: NativeEmarsysConfig,
 };
 
-export type { Event };
-export type { InlineInAppEvent, InlineInAppCompletion, InlineInAppClose };
+export type { Event } from './wrapper/NativeEmarsys';
+export { 
+  default as InlineInAppView,
+  type Event as InlineInAppEvent,
+  type Completion as InlineInAppCompletion,
+  type Close as InlineInAppClose
+} from './wrapper/InlineInAppViewNativeComponent';
+export type { CartItem, Product } from './wrapper/NativeEmarsysPredict';
+export { Logic, Filter } from './wrapper/predict';

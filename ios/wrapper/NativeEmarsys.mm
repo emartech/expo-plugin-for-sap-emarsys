@@ -69,8 +69,7 @@ RCT_EXPORT_MODULE()
   }
 }
 
-- (void)trackDeepLink:(NSString *)url
-  resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+- (void)trackDeepLink:(NSString *)url resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
     NSUserActivity *userActivity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
     userActivity.webpageURL = [NSURL URLWithString:url];
