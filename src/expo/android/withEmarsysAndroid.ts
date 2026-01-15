@@ -1,7 +1,5 @@
-import {
-  ConfigPlugin
-} from 'expo/config-plugins';
-import { EMSOptions } from '../../types';
+import { ConfigPlugin } from 'expo/config-plugins';
+import { type EMSOptions } from '../withEmarsysPlugin';
 import { withEmarsysProjectBuildGradle } from './withEmarsysProjectBuildGradle';
 import { withEmarsysAppBuildGradle } from './withEmarsysAppBuildGradle';
 import { withEmarsysAndroidManifest } from './withEmarsysAndroidManifest';

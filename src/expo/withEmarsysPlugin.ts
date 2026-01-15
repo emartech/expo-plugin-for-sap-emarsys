@@ -1,13 +1,11 @@
 import { ConfigPlugin, createRunOncePlugin } from "expo/config-plugins";
 import { withEmarsysAndroid } from "./android/withEmarsysAndroid";
 import { withEmarsysiOS } from "./ios/withEmarsysiOS";
-import { EMSOptions } from "../types";
 
 const withEmarsysPlugin: ConfigPlugin<EMSOptions> = (
   config,
   options
 ) => {
-  console.log("withEmarsysPlugin called with options:", options);
   config = withEmarsysAndroid(config, options);
   config = withEmarsysiOS(config, options);
   return config;
@@ -20,3 +18,12 @@ export default createRunOncePlugin(
   pkg.name,
   pkg.version
 );
+
+export type EMSOptions = {
+  applicationCode?: string;
+  merchantId?: string;
+  enableConsoleLogging?: boolean;
+  androidSharedPackageNames?: string[];
+  androidSharedSecret?: string;
+  iosSharedKeychainAccessGroup?: string;
+};

@@ -1,7 +1,4 @@
-import {
-  ConfigPlugin,
-  withPodfileProperties
-} from 'expo/config-plugins';
+import { ConfigPlugin, withPodfileProperties } from 'expo/config-plugins';
 
 export const withEmarsysPodfileConfig: ConfigPlugin = (config) => {
   config = withPodfileProperties(config, ({ modResults, ...config }) => {

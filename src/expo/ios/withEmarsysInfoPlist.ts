@@ -1,8 +1,5 @@
-import {
-  ConfigPlugin,
-  withInfoPlist
-} from 'expo/config-plugins';
-import { EMSOptions } from '../../types';
+import { ConfigPlugin, withInfoPlist } from 'expo/config-plugins';
+import { type EMSOptions } from '../withEmarsysPlugin';
 import { STORE_NAME } from '../../constants';
 
 

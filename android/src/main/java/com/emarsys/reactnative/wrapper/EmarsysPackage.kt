@@ -9,44 +9,38 @@ import com.facebook.react.uimanager.ViewManager
 
 class EmarsysPackage : BaseReactPackage() {
 
+  val moduleNames = listOf(
+    NativeEmarsys.NAME,
+    NativeEmarsysPush.NAME,
+    NativeEmarsysInApp.NAME,
+    NativeEmarsysConfig.NAME,
+  )
+
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? =
     when (name) {
       NativeEmarsys.NAME -> NativeEmarsys(reactContext)
       NativeEmarsysPush.NAME -> NativeEmarsysPush(reactContext)
+      NativeEmarsysInApp.NAME -> NativeEmarsysInApp(reactContext)
       NativeEmarsysConfig.NAME -> NativeEmarsysConfig(reactContext)
       else -> null
     }
 
   override fun getReactModuleInfoProvider() = ReactModuleInfoProvider {
-    mapOf(
-      NativeEmarsys.NAME to ReactModuleInfo(
-        name = NativeEmarsys.NAME,
-        className = NativeEmarsys.NAME,
-        canOverrideExistingModule = false,
-        needsEagerInit = false,
-        isCxxModule = false,
-        isTurboModule = true
-      ),
-      NativeEmarsysPush.NAME to ReactModuleInfo(
-        name = NativeEmarsysPush.NAME,
-        className = NativeEmarsysPush.NAME,
-        canOverrideExistingModule = false,
-        needsEagerInit = false,
-        isCxxModule = false,
-        isTurboModule = true
-      ),
-      NativeEmarsysConfig.NAME to ReactModuleInfo(
-        name = NativeEmarsysConfig.NAME,
-        className = NativeEmarsysConfig.NAME,
+    moduleNames.associate {
+      it to ReactModuleInfo(
+        name = it,
+        className = it,
         canOverrideExistingModule = false,
         needsEagerInit = false,
         isCxxModule = false,
         isTurboModule = true
       )
-    )
+    }
   }
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> =
-    listOf(InlineInAppViewManager(reactContext))
+    listOf(
+      InlineInAppViewManager(reactContext)
+    )
 
 }

@@ -6,15 +6,19 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "prepare:android": "cd android && ./gradlew generateCodegenArtifactsFromSchema && cd ..",
+    "prepare:ios": "cd ios && pod install && cd .."
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^7.4.0",
+    "@react-navigation/native": "^7.1.8",
     "expo": "~53.0.20",
-    "expo-plugin-for-sap-emarsys": "file:../",
     "expo-notifications": "~0.31.4",
+    "expo-plugin-for-sap-emarsys": "file:../",
     "react": "19.0.0",
     "react-native": "0.79.5",
-    "react-native-emarsys-wrapper": "github:emartech/react-native-emarsys-sdk"
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

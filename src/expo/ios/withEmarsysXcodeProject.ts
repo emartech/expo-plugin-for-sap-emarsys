@@ -1,8 +1,5 @@
-import {
-  ConfigPlugin,
-  withXcodeProject,
-} from 'expo/config-plugins';
-import { EMSOptions } from '../../types';
+import { ConfigPlugin, withXcodeProject } from 'expo/config-plugins';
+import { type EMSOptions } from '../withEmarsysPlugin';
 
 const NOTIFICATION_SERVICE_TARGET = 'NotificationService';
 const NOTIFICATION_SERVICE_FILES = [
@@ -14,7 +11,6 @@ export const withEmarsysXcodeProject: ConfigPlugin<EMSOptions> = (config, _optio
   withXcodeProject(config, (config) => {
     // Notification Service Extension
     if (config.modResults.pbxGroupByName(NOTIFICATION_SERVICE_TARGET)) {
-      console.log(`${NOTIFICATION_SERVICE_TARGET} already exists`);
       return config;
     }
 

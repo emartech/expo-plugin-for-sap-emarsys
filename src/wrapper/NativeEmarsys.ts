@@ -3,7 +3,11 @@ import type { EventEmitter, UnsafeObject } from 'react-native/Libraries/Types/Co
 
 export interface Spec extends TurboModule {
   readonly onEvent: EventEmitter<Event>;
-  setEventHandler(): Promise<boolean>;
+  setEventHandler(): Promise<void>;
+  setContact(contactFieldId: number, contactFieldValue: string): Promise<void>;
+  clearContact(): Promise<void>;
+  trackCustomEvent(eventName: string, eventAttributes?: UnsafeObject | null): Promise<void>;
+  trackDeepLink(url: string): Promise<string>;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>(

@@ -34,8 +34,8 @@
       [
         "expo-plugin-for-sap-emarsys",
         {
-          "applicationCode": "EMSE7-A1D58",
-          "merchantId": "102F6519FC312033",
+          "applicationCode": "EMS25-20071",
+          "merchantId": "1DF86BF95CBE8F19",
           "enableConsoleLogging": true,
           "androidSharedPackageNames": ["expo.modules.emarsysplugin.example"],
           "androidSharedSecret": "emsSecret",

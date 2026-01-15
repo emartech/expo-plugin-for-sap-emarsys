@@ -1,6 +1,6 @@
 import { ExpoConfig } from 'expo/config';
+import { type EMSOptions } from '../../../src/expo/withEmarsysPlugin';
 import { withEmarsysXcodeProject } from '../../../src/expo/ios/withEmarsysXcodeProject';
-import { EMSOptions } from '../../../src/types';
 
 // Mock the expo/config-plugins module
 jest.mock('expo/config-plugins', () => ({
@@ -139,7 +139,6 @@ describe('withEmarsysXcodeProject', () => {
       const result = withEmarsysXcodeProject(mockConfig, mockOptions);
 
       expect(mockConfig.modResults.pbxGroupByName).toHaveBeenCalledWith('NotificationService');
-      expect(consoleLogSpy).toHaveBeenCalledWith('NotificationService already exists');
       expect(mockConfig.modResults.addTarget).not.toHaveBeenCalled();
       expect(result).toBe(mockConfig);
     });

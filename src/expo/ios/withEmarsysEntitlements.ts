@@ -1,8 +1,5 @@
-import {
-  ConfigPlugin,
-  withEntitlementsPlist
-} from 'expo/config-plugins';
-import { EMSOptions } from '../../types';
+import { ConfigPlugin, withEntitlementsPlist } from 'expo/config-plugins';
+import { type EMSOptions } from '../withEmarsysPlugin';
 
 export const withEmarsysEntitlements: ConfigPlugin<EMSOptions> = (config, options) =>
   withEntitlementsPlist(config, config => {

@@ -1,7 +1,8 @@
-#import <Foundation/Foundation.h>
-#import <NativeEmarsys/NativeEmarsys.h>
 #import <EmarsysSDK/Emarsys.h>
+#import <NativeEmarsys/NativeEmarsys.h>
 #import "StorageUtils.h"
+
+#define NAME @"NativeEmarsysConfig"
 
 @interface NativeEmarsysConfig : NSObject <NativeEmarsysConfigSpec>
 
@@ -17,32 +18,30 @@ RCT_EXPORT_MODULE()
 
 - (void)changeApplicationCode:(NSString *)applicationCode resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
-    [Emarsys.config changeApplicationCode:applicationCode completionBlock:^(NSError * _Nullable error) {
-      if (NULL != error) {
-        reject(@"Error NativeEmarsysConfig", @"changeApplicationCode: ", error);
-      } else {
+    [Emarsys.config changeApplicationCode:applicationCode completionBlock:^(NSError *error) {
+      if (error == nil) {
         [StorageUtils setUserDefaultsString:(applicationCode ?: @"") forKey: @"applicationCode"];
         resolve(nil);
+      } else {
+        reject(NAME, @"changeApplicationCode", error);
       }
     }];
-  }
-  @catch (NSException *exception) {
+  } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);
   }
 }
 
 - (void)changeMerchantId:(NSString *)merchantId resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
-    [Emarsys.config changeMerchantId:merchantId completionBlock:^(NSError * _Nullable error) {
-      if (NULL != error) {
-        reject(@"Error NativeEmarsysConfig", @"changeMerchantId: ", error);
-      } else {
+    [Emarsys.config changeMerchantId:merchantId completionBlock:^(NSError *error) {
+      if (error == nil) {
         [StorageUtils setUserDefaultsString:(merchantId ?: @"") forKey: @"merchantId"];
         resolve(nil);
+      } else {
+        reject(NAME, @"changeMerchantId", error);
       }
     }];
-  }
-  @catch (NSException *exception) {
+  } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);
   }
 }
@@ -99,6 +98,10 @@ RCT_EXPORT_MODULE()
   } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);
   }
+}
+
+- (void)getRNPluginVersion:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+  // Overriden and implemented in index.ts
 }
 
 @end

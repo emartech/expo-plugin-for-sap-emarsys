@@ -1,8 +1,4 @@
-import {
-  ConfigPlugin,
-  withAndroidManifest,
-  withDangerousMod
-} from 'expo/config-plugins';
+import { ConfigPlugin, withAndroidManifest, withDangerousMod } from 'expo/config-plugins';
 import { setMetaData } from './withEmarsysAndroidHelpers';
 
 const MOBILE_ENGAGE_LOGO_ICON = 'mobile_engage_logo_icon';
@@ -24,7 +20,6 @@ export const withEmarsysPushMessageLogoIcon: ConfigPlugin = (config) => {
 
       fs.mkdirSync(path.dirname(dest), { recursive: true });
       fs.copyFileSync(source, dest);
-      console.log(`Copied ${MOBILE_ENGAGE_LOGO_ICON} to ${dest}`);
       return config;
     },
   ]);

@@ -22,14 +22,14 @@ export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
   supportedCommands: ['loadInApp']
 });
 
-type Event = {
+export type Event = {
   name: string;
   payload?: UnsafeMixed | null;
 };
 
-type Completion = {
+export type Completion = {
   error?: string | null;
 };
 
-type Close = {
+export type Close = {
 };

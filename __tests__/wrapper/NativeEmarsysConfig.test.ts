@@ -14,6 +14,7 @@ describe('NativeEmarsysConfig', () => {
       getClientId: jest.fn(),
       getLanguageCode: jest.fn(),
       getSdkVersion: jest.fn(),
+      getRNPluginVersion: jest.fn(),
     } as unknown as Spec;
 
   });
@@ -190,6 +191,25 @@ describe('NativeEmarsysConfig', () => {
     });
   });
 
+  describe('getRNPluginVersion', () => {
+    it('should return the RN Plugin version', async () => {
+      const expectedVersion = '1.0.0';
+      (mockConfig.getRNPluginVersion as jest.Mock).mockResolvedValue(expectedVersion);
+
+      const result = await mockConfig.getRNPluginVersion();
+
+      expect(result).toBe(expectedVersion);
+      expect(mockConfig.getRNPluginVersion).toHaveBeenCalledTimes(1);
+    });
+
+    it('should handle errors when getting RN Plugin version', async () => {
+      const error = new Error('Failed to get RN Plugin version');
+      (mockConfig.getRNPluginVersion as jest.Mock).mockRejectedValue(error);
+
+      await expect(mockConfig.getRNPluginVersion()).rejects.toThrow('Failed to get RN Plugin version');
+    });
+  });
+
   describe('Type Validation', () => {
     it('should have all required methods defined', () => {
       expect(mockConfig.changeApplicationCode).toBeDefined();
@@ -200,6 +220,7 @@ describe('NativeEmarsysConfig', () => {
       expect(mockConfig.getClientId).toBeDefined();
       expect(mockConfig.getLanguageCode).toBeDefined();
       expect(mockConfig.getSdkVersion).toBeDefined();
+      expect(mockConfig.getRNPluginVersion).toBeDefined();
     });
 
     it('should have all methods as functions', () => {
@@ -211,6 +232,7 @@ describe('NativeEmarsysConfig', () => {
       expect(typeof mockConfig.getClientId).toBe('function');
       expect(typeof mockConfig.getLanguageCode).toBe('function');
       expect(typeof mockConfig.getSdkVersion).toBe('function');
+      expect(typeof mockConfig.getRNPluginVersion).toBe('function');
     });
   });
 });

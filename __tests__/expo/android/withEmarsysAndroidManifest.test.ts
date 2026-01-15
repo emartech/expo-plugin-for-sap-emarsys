@@ -1,5 +1,5 @@
 import { ExpoConfig } from 'expo/config';
-import { EMSOptions } from '../../../src/types';
+import { type EMSOptions } from '../../../src/expo/withEmarsysPlugin';
 import { withEmarsysAndroidManifest } from '../../../src/expo/android/withEmarsysAndroidManifest';
 
 // Mock the expo/config-plugins module

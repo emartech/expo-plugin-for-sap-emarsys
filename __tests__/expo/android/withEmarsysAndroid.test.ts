@@ -1,7 +1,5 @@
-import { 
-  withEmarsysAndroid
-} from '../../../src/expo/android/withEmarsysAndroid';
-import { EMSOptions } from '../../../src/types';
+import { type EMSOptions } from '../../../src/expo/withEmarsysPlugin';
+import {  withEmarsysAndroid } from '../../../src/expo/android/withEmarsysAndroid';
 
 describe('withEmarsysAndroid', () => {
   let _mockOptions: EMSOptions;

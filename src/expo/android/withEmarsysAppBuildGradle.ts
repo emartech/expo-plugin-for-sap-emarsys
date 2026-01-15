@@ -1,7 +1,4 @@
-import {
-  ConfigPlugin,
-  withAppBuildGradle
-} from 'expo/config-plugins'
+import { ConfigPlugin, withAppBuildGradle } from 'expo/config-plugins'
 
 const DESUGARING_COMPILE_OPTIONS = "coreLibraryDesugaringEnabled true";
 const DESUGARING_DEP = "coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs_nio:";

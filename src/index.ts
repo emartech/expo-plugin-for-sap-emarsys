@@ -1,18 +1,33 @@
 import type { EventSubscription } from 'react-native';
+import './wrapper';
 import NativeEmarsys, { type Event } from './wrapper/NativeEmarsys';
-import InlineInAppView, { Commands as InlineInAppViewCommands } from './wrapper/InlineInAppViewNativeComponent';
 import NativeEmarsysPush from './wrapper/NativeEmarsysPush';
+import NativeEmarsysInApp from './wrapper/NativeEmarsysInApp';
+import InlineInAppView, { Commands as InlineInAppCommands } from './wrapper/InlineInAppViewNativeComponent';
+import type { Event as InlineInAppEvent, Completion as InlineInAppCompletion, Close as InlineInAppClose } from './wrapper/InlineInAppViewNativeComponent';
 import NativeEmarsysConfig from './wrapper/NativeEmarsysConfig';
 
+NativeEmarsysConfig.getRNPluginVersion = () => {
+  return require('../package.json').version;
+};
+
 export default {
-  setEventHandler: async (handler: (arg: Event) => void | Promise<void>): Promise<EventSubscription> =>  {
+  setEventHandler: (handler: (arg: Event) => void | Promise<void>): EventSubscription =>  {
     const eventSubscription = NativeEmarsys.onEvent(handler);
-    await NativeEmarsys.setEventHandler();
+    NativeEmarsys.setEventHandler();
     return eventSubscription;
   },
-  push: NativeEmarsysPush,
-  config: NativeEmarsysConfig,
+  setContact: NativeEmarsys.setContact,
+  clearContact: NativeEmarsys.clearContact,
+  trackCustomEvent: NativeEmarsys.trackCustomEvent,
+  trackDeepLink: NativeEmarsys.trackDeepLink,
 
+  push: NativeEmarsysPush,
+  inApp: NativeEmarsysInApp,
   InlineInAppView,
-  InlineInApp: InlineInAppViewCommands
+  InlineInApp: InlineInAppCommands,
+  config: NativeEmarsysConfig,
 };
+
+export type { Event };
+export type { InlineInAppEvent, InlineInAppCompletion, InlineInAppClose };

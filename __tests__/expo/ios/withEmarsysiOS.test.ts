@@ -1,7 +1,5 @@
-import { 
-  withEmarsysiOS
-} from '../../../src/expo/ios/withEmarsysiOS';
-import { EMSOptions } from '../../../src/types';
+import { type EMSOptions } from '../../../src/expo/withEmarsysPlugin';
+import { withEmarsysiOS } from '../../../src/expo/ios/withEmarsysiOS';
 
 describe('withEmarsysiOS', () => {
   let _mockOptions: EMSOptions;

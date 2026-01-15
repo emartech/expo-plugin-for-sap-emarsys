@@ -1,5 +1,4 @@
-import withEmarsysPlugin from '../src/expo/withEmarsysPlugin';
-import { EMSOptions } from '../src/expo/types';
+import withEmarsysPlugin, { type EMSOptions } from '../../src/expo/withEmarsysPlugin';
 
 describe('withEmarsysPlugin', () => {
   const mockConfig = {
