@@ -18,8 +18,7 @@ RCT_EXPORT_MODULE()
 
 - (void)setPushToken:(NSString *)pushToken resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
-    NSData *pushTokenData = [StringUtils dataWithDeviceToken:pushToken];
-    [Emarsys.push setPushToken:pushTokenData completionBlock:^(NSError *error) {
+    [Emarsys.push setPushToken:[pushToken deviceTokenData] completionBlock:^(NSError *error) {
       if (error == nil) {
         resolve(nil);
       } else {
@@ -47,8 +46,7 @@ RCT_EXPORT_MODULE()
 
 - (void)getPushToken:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
-    NSData *pushTokenData = [Emarsys.push pushToken];
-    NSString *pushToken = [StringUtils stringWithDeviceToken:pushTokenData];
+    NSString *pushToken = [[Emarsys.push pushToken] deviceTokenString];
     resolve(pushToken);
   } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);

@@ -33,7 +33,7 @@
 }
 
 + (void)setUserDefaultsString:(NSString *)value forKey:(NSString *)key {
-  [[[NSUserDefaults alloc] initWithSuiteName:STORE_NAME] setObject:value forKey: key];
+  [[[NSUserDefaults alloc] initWithSuiteName:STORE_NAME] setObject:value forKey:key];
 }
 
 @end

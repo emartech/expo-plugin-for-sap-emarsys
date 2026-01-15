@@ -3,7 +3,7 @@ package com.emarsys.reactnative.wrapper
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.emarsys.core.api.result.CompletionListener
-import com.emarsys.reactnative.utils.MapUtils
+import com.emarsys.reactnative.utils.MapUtils.toWritableMap
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContext
@@ -37,7 +37,7 @@ class InlineInAppViewManager(context: ReactApplicationContext) : SimpleViewManag
     view.inlineInAppView.onAppEventListener = { property: String?, json: JSONObject ->
       dispatchEvent(view, "onEvent", Arguments.createMap().apply {
         putString("name", property)
-        putMap("payload", MapUtils.toWritableMap(json)?.getMap("payload"))
+        putMap("payload", json.toWritableMap().getMap("payload"))
       })
     }
     view.inlineInAppView.onCompletionListener = CompletionListener { errorCause: Throwable? ->
@@ -87,7 +87,7 @@ class InlineInAppView : LinearLayout {
     addView(inlineInAppView)
   }
 
-  // Native components do not re-layout properly, width and height remain 0 .
+  // Native components do not re-layout properly, width and height remain 0
   // Workaround based on:
   // https://github.com/facebook/react-native/issues/4990
   // https://github.com/facebook/react-native/issues/17968

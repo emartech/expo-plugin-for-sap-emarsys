@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import com.emarsys.config.EmarsysConfig
+import com.emarsys.reactnative.utils.StringUtils.splitAndTrim
 
 object StorageUtils {
 
@@ -38,7 +39,7 @@ object StorageUtils {
       applicationCode = getString(application, "applicationCode"),
       merchantId = getString(application, "merchantId"),
       verboseConsoleLoggingEnabled = getApplicationMetaDataBoolean(application, "enableConsoleLogging"),
-      sharedPackageNames = ArrayUtils.toList(getApplicationMetaDataString(application, "sharedPackageNames")),
+      sharedPackageNames = getApplicationMetaDataString(application, "sharedPackageNames")?.splitAndTrim(),
       sharedSecret = getApplicationMetaDataString(application, "sharedSecret")
     )
   }

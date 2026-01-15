@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
-import Emarsys from 'expo-plugin-for-sap-emarsys';
+import Emarsys, { InlineInAppView, Message, Tag } from 'expo-plugin-for-sap-emarsys';
 import { ScrollView, Button, Alert, Separator } from '../components';
+
+let inboxMessages: Message[] | null | undefined = undefined
 
 export default function PushScreen() {
   const inlineInAppView = useRef<any>(null);
@@ -18,9 +20,10 @@ export default function PushScreen() {
         return await Emarsys.inApp.isPaused();
       }} printResult />
       <Button title="InApp Load Inline InApp" action={async () => {
-        Emarsys.InlineInApp.loadInApp(inlineInAppView.current, 'view-id');
+        const viewId = 'view-id';
+        Emarsys.inApp.loadInlineInApp(inlineInAppView.current, viewId);
       }} />
-      <Emarsys.InlineInAppView
+      <InlineInAppView
         ref={inlineInAppView}
         style={{ width: '100%', height: inlineInAppViewHeight }}
         onEvent={(event) => {
@@ -40,18 +43,26 @@ export default function PushScreen() {
 
       <Separator />
 
-      <Button title="Inbox Fetch Messages" printResult={true} action={async () => {
-        const messages = await Emarsys.inbox.fetchMessages();
-        return JSON.stringify(messages, null, 2);
-      }} />
-
+      <Button title="Inbox Fetch Messages" action={async () => {
+        inboxMessages = await Emarsys.inbox.fetchMessages();
+        return JSON.stringify(inboxMessages, null, 2);
+      }} printResult />
       <Button title="Inbox Add Tag" action={async () => {
-        await Emarsys.inbox.addTag('seen', '21991043375');
-      }} />
-
+        if (inboxMessages && inboxMessages[0]) {
+          await Emarsys.inbox.addTag(Tag.seen, inboxMessages[0].id);
+          return inboxMessages[0].id;
+        } else {
+          return 'No inbox messages. Call Inbox Fetch Messages first.';
+        }
+      }} printResult />
       <Button title="Inbox Remove Tag" action={async () => {
-        await Emarsys.inbox.removeTag('seen', '21991043375');
-      }} />
+        if (inboxMessages && inboxMessages[0]) {
+          await Emarsys.inbox.removeTag(Tag.seen, inboxMessages[0].id);
+          return inboxMessages[0].id;
+        } else {
+          return 'No inbox messages. Call Inbox Fetch Messages first.';
+        }
+      }} printResult />
 
     </ScrollView>
   );

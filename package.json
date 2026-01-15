@@ -47,7 +47,7 @@
   "codegenConfig": {
     "name": "NativeEmarsys",
     "type": "all",
-    "jsSrcsDir": "src/wrapper",
+    "jsSrcsDir": "src/wrapper/native",
     "android": {
       "javaPackageName": "com.emarsys.reactnative.wrapper"
     },

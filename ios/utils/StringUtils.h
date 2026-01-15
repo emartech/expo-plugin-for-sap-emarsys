@@ -1,8 +1,13 @@
 #import <Foundation/Foundation.h>
 
-@interface StringUtils : NSObject
+@interface NSString (RNEmarsys)
 
-+ (NSData *)dataWithDeviceToken:(NSString *)deviceToken;
-+ (NSString *)stringWithDeviceToken:(NSData *)deviceToken;
+- (NSData *)deviceTokenData;
+
+@end
+
+@interface NSData (RNEmarsys)
+
+- (NSString *)deviceTokenString;
 
 @end

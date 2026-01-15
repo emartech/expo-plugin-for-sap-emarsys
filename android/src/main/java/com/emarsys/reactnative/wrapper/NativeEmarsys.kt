@@ -3,7 +3,8 @@ package com.emarsys.reactnative.wrapper
 import android.content.Context
 import com.emarsys.Emarsys
 import com.emarsys.reactnative.utils.EventUtils
-import com.emarsys.reactnative.utils.MapUtils
+import com.emarsys.reactnative.utils.MapUtils.toStringMap
+import com.emarsys.reactnative.utils.MapUtils.toWritableMap
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
@@ -19,7 +20,7 @@ class NativeEmarsys(reactContext: ReactApplicationContext) : NativeEmarsysSpec(r
 
   override fun setEventHandler(promise: Promise) {
     EventUtils.setEventHandler { context: Context, eventName: String, payload: JSONObject? ->
-      emitOnEvent(MapUtils.toWritableMap(JSONObject().put("name", eventName).put("payload", payload)))
+      emitOnEvent(JSONObject().put("name", eventName).put("payload", payload).toWritableMap())
     }
     promise.resolve(null)
   }
@@ -54,7 +55,7 @@ class NativeEmarsys(reactContext: ReactApplicationContext) : NativeEmarsysSpec(r
 
   override fun trackCustomEvent(eventName: String, eventAttributes: ReadableMap?, promise: Promise) {
     try {
-      Emarsys.trackCustomEvent(eventName, MapUtils.toMap(eventAttributes)) { errorCause: Throwable? ->
+      Emarsys.trackCustomEvent(eventName, eventAttributes?.toStringMap()) { errorCause: Throwable? ->
         if (errorCause == null) {
           promise.resolve(null)
         } else {
