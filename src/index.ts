@@ -1,6 +1,7 @@
 import type { EventSubscription } from 'react-native';
 import NativeEmarsys, { type Event } from './wrapper/NativeEmarsys';
 import InlineInAppView, { Commands as InlineInAppViewCommands } from './wrapper/InlineInAppViewNativeComponent';
+import NativeEmarsysPush from './wrapper/NativeEmarsysPush';
 import NativeEmarsysConfig from './wrapper/NativeEmarsysConfig';
 
 export default {
@@ -9,6 +10,7 @@ export default {
     await NativeEmarsys.setEventHandler();
     return eventSubscription;
   },
+  push: NativeEmarsysPush,
   config: NativeEmarsysConfig,
 
   InlineInAppView,
