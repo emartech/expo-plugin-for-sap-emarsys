@@ -1,0 +1,45 @@
+name: Run iOS Tests
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  ios-tests:
+    runs-on: macos-15
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install example dependencies
+      working-directory: example
+      run: npm install
+
+    - name: Prebuild iOS project
+      working-directory: example
+      run: npm run prebuild:ios
+
+    - name: Use Xcode 16.4
+      run: sudo xcode-select -switch /Applications/Xcode_16.4.app
+      
+    - name: Open simulator
+      run: open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/
+
+    - name: Run iOS Tests
+      working-directory: example/ios
+      run: |
+        xcodebuild test \
+          -workspace expoemarsyspluginexample.xcworkspace \
+          -scheme ExpoPluginForSAPEmarsysTests \
+          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6' \
+          -only-testing:ExpoPluginForSAPEmarsysTests \
+          -quiet

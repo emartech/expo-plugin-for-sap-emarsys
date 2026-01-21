@@ -1,0 +1,42 @@
+name: Run Android Tests
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  android-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install example dependencies
+      working-directory: example
+      run: npm install
+
+    - name: Create google-services.json
+      run: echo '${{ secrets.GOOGLE_SERVICE_JSON }}' > example/assets/google-services.json
+
+    - name: Prebuild Android project
+      working-directory: example
+      run: npm run prebuild:android
+
+    - name: Run Android Tests
+      working-directory: example/android
+      run: ./gradlew :expo-plugin-for-sap-emarsys:test

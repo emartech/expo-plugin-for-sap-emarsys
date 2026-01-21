@@ -1,10 +1,11 @@
-name: Run Expo Plugin Tests
+name: Run Integration Tests
 
-on: push
+on:
+  workflow_call:
+  workflow_dispatch:
 
 jobs:
-  run-test:
-    name: Run tests
+  integration-tests:
     runs-on: ubuntu-latest
 
     steps:
