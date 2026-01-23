@@ -14,6 +14,7 @@ class EmarsysPackage : BaseReactPackage() {
     NativeEmarsysPush.NAME,
     NativeEmarsysInApp.NAME,
     NativeEmarsysInbox.NAME,
+    NativeEmarsysGeofence.NAME,
     NativeEmarsysPredict.NAME,
     NativeEmarsysConfig.NAME,
   )
@@ -24,6 +25,7 @@ class EmarsysPackage : BaseReactPackage() {
       NativeEmarsysPush.NAME -> NativeEmarsysPush(reactContext)
       NativeEmarsysInApp.NAME -> NativeEmarsysInApp(reactContext)
       NativeEmarsysInbox.NAME -> NativeEmarsysInbox(reactContext)
+      NativeEmarsysGeofence.NAME -> NativeEmarsysGeofence(reactContext)
       NativeEmarsysPredict.NAME -> NativeEmarsysPredict(reactContext)
       NativeEmarsysConfig.NAME -> NativeEmarsysConfig(reactContext)
       else -> null

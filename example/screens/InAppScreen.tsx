@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import Emarsys, { InlineInAppView, Message, Tag } from 'expo-plugin-for-sap-emarsys';
-import { ScrollView, Button, Alert, Separator } from '../components';
+import { ScrollView, Button, Alert, Separator, SectionTitle } from '../components';
 
 let inboxMessages: Message[] | null | undefined = undefined
 
@@ -43,11 +43,13 @@ export default function PushScreen() {
 
       <Separator />
 
-      <Button title="Inbox Fetch Messages" action={async () => {
+      <SectionTitle title="Inbox" />
+
+      <Button title="Fetch Messages" action={async () => {
         inboxMessages = await Emarsys.inbox.fetchMessages();
         return JSON.stringify(inboxMessages, null, 2);
       }} printResult />
-      <Button title="Inbox Add Tag" action={async () => {
+      <Button title="Add Tag" action={async () => {
         if (inboxMessages && inboxMessages[0]) {
           await Emarsys.inbox.addTag(Tag.seen, inboxMessages[0].id);
           return inboxMessages[0].id;
@@ -55,7 +57,7 @@ export default function PushScreen() {
           return 'No inbox messages. Call Inbox Fetch Messages first.';
         }
       }} printResult />
-      <Button title="Inbox Remove Tag" action={async () => {
+      <Button title="Remove Tag" action={async () => {
         if (inboxMessages && inboxMessages[0]) {
           await Emarsys.inbox.removeTag(Tag.seen, inboxMessages[0].id);
           return inboxMessages[0].id;

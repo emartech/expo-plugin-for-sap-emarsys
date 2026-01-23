@@ -44,6 +44,12 @@ export function Separator() {
   );
 }
 
+export function SectionTitle({ title }: { title: string }) {
+  return (
+    <Text style={styles.sectionTitle}>{title}</Text>
+  );
+}
+
 const styles = StyleSheet.create({
   scrollView: {
     paddingVertical: 20,
@@ -66,5 +72,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#999',
     height: 1,
     marginVertical: 20,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    marginTop: 5,
+    color: '#333',
   },
 });
