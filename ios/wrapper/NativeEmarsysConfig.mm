@@ -16,11 +16,12 @@ RCT_EXPORT_MODULE()
   return std::make_shared<facebook::react::NativeEmarsysConfigSpecJSI>(params);
 }
 
-- (void)changeApplicationCode:(NSString *)applicationCode resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+- (void)changeApplicationCode:(NSString * _Nullable)applicationCode
+  resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
     [Emarsys.config changeApplicationCode:applicationCode completionBlock:^(NSError *error) {
       if (error == nil) {
-        [StorageUtils setUserDefaultsString:(applicationCode ?: @"") forKey: @"applicationCode"];
+        [StorageUtils setUserDefaultsString:(applicationCode ?: @"") forKey:@"applicationCode"];
         resolve(nil);
       } else {
         reject(NAME, @"changeApplicationCode", error);
@@ -31,11 +32,12 @@ RCT_EXPORT_MODULE()
   }
 }
 
-- (void)changeMerchantId:(NSString *)merchantId resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+- (void)changeMerchantId:(NSString * _Nullable)merchantId
+  resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
     [Emarsys.config changeMerchantId:merchantId completionBlock:^(NSError *error) {
       if (error == nil) {
-        [StorageUtils setUserDefaultsString:(merchantId ?: @"") forKey: @"merchantId"];
+        [StorageUtils setUserDefaultsString:(merchantId ?: @"") forKey:@"merchantId"];
         resolve(nil);
       } else {
         reject(NAME, @"changeMerchantId", error);
@@ -101,7 +103,7 @@ RCT_EXPORT_MODULE()
 }
 
 - (void)getRNPluginVersion:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
-  // Overriden and implemented in index.ts
+  // Overridden and implemented in src/wrapper/config.ts
 }
 
 @end

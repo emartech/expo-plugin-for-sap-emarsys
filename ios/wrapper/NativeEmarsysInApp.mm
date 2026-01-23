@@ -1,6 +1,5 @@
 #import <EmarsysSDK/Emarsys.h>
 #import <NativeEmarsys/NativeEmarsys.h>
-#import "StringUtils.h"
 
 #define NAME @"NativeEmarsysInApp"
 

@@ -1,122 +1,72 @@
 package com.emarsys.reactnative.utils
 
+import com.emarsys.reactnative.utils.ArrayUtils.toWritableArray
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.bridge.UnexpectedNativeTypeException
-import com.facebook.react.bridge.WritableMap
 import com.facebook.react.bridge.WritableArray
+import com.facebook.react.bridge.WritableMap
 import org.json.JSONArray
-import org.json.JSONException
 import org.json.JSONObject
-import java.net.URL
 
 object MapUtils {
 
-  fun put(map: WritableMap, key: String, value: Any?) {
-    if (value == null) {
-      return
-    }
-
-    when (value) {
-      is String -> map.putString(key, value)
-      is URL -> map.putString(key, value.toString())
-      is Boolean -> map.putBoolean(key, value)
-      is Int -> map.putInt(key, value)
-      is Long -> map.putDouble(key, value.toDouble())
-      is Double -> map.putDouble(key, value)
-      is Float -> map.putDouble(key, value.toDouble())
-      is Map<*, *>  -> {
-        val nestedMap = toWritableMap(value as? Map<String, Any?>)
-        if (nestedMap != null) {
-          map.putMap(key, nestedMap)
-        }
-      }
-      is List<*> -> {
-        val array = Arguments.createArray()
-        value.forEach { item ->
-          when (item) {
-            is String -> array.pushString(item)
-            is WritableMap -> array.pushMap(item)
-            else -> { }
-          }
-        }
-        map.putArray(key, array)
-      }
-    }
-  }
-
-  fun toMap(readableMap: ReadableMap?) : Map<String, String>? {
-    if (readableMap == null) {
-      return null
-    }
-
+  fun ReadableMap.toStringMap(): Map<String, String> {
     val map = mutableMapOf<String, String>()
-    val iterator = readableMap.keySetIterator()
+    val iterator = this.keySetIterator()
     while (iterator.hasNextKey()) {
-      try {
-        val key = iterator.nextKey()
-        val value = readableMap.getString(key)
-        
-        if (value != null) {
-          map[key] = value
-        }
-      } catch (e: UnexpectedNativeTypeException) {
-        e.printStackTrace()
+      val key = iterator.nextKey()
+      val value = this.getString(key)
+
+      if (value != null) {
+        map[key] = value
       }
     }
 
     return map
   }
 
-  fun toWritableMap(jsonObject: JSONObject?): WritableMap? {
-    if (jsonObject == null) {
-      return null
+  fun WritableMap.put(key: String, value: Any?) {
+    when (value) {
+      is String -> this.putString(key, value)
+      is Double, is Float -> this.putDouble(key, value.toDouble())
+      is Long -> this.putLong(key, value)
+      is Int, is Number -> this.putInt(key, value.toInt())
+      is Boolean -> this.putBoolean(key, value)
+      is Map<*, *> -> this.putMap(key, (value as? Map<String, Any?>)?.toWritableMap())
+      is List<*> -> this.putArray(key, (value as? List<Any?>)?.toWritableArray())
+      is ReadableMap -> this.putMap(key, value)
+      is ReadableArray -> this.putArray(key, value)
+      null -> {}
+      else -> this.putString(key, value.toString())
     }
+  }
 
+  fun Map<String, Any?>.toWritableMap(): WritableMap {
     val writableMap = Arguments.createMap()
-    val iterator = jsonObject.keys()
-    while (iterator.hasNext()) {
-      try {
-        val key = iterator.next()
-        val value = jsonObject.opt(key)
-
-        if (value is String) {
-          writableMap.putString(key, jsonObject.getString(key))
-        } else if (value is Double || value is Float) {
-          writableMap.putDouble(key, jsonObject.getDouble(key))
-        } else if (value is Integer || value is Number) {
-          writableMap.putInt(key, jsonObject.getInt(key))
-        } else if (value is Boolean) {
-          writableMap.putBoolean(key, jsonObject.getBoolean(key))
-        } else if (value is JSONObject) {
-          writableMap.putMap(key, toWritableMap(jsonObject.getJSONObject(key)))
-        } else if (value is JSONArray) {
-          writableMap.putArray(key, ArrayUtils.toWritableArray(jsonObject.getJSONArray(key)))
-        } else if (value == JSONObject.NULL || value == null) {
-          writableMap.putNull(key)
-        }
-      } catch (e: JSONException) {
-        e.printStackTrace()
-      }
+    for ((key, value) in this) {
+      writableMap.put(key, value)
     }
 
     return writableMap
   }
 
-  fun toWritableMap(map: Map<String, Any?>?): WritableMap? {
-    if (map == null) {
-      return null
-    }
-
+  fun JSONObject.toWritableMap(): WritableMap {
     val writableMap = Arguments.createMap()
-    map.forEach { (key, value) ->
+    val iterator = this.keys()
+    while (iterator.hasNext()) {
+      val key = iterator.next()
+      val value = this.opt(key)
+
       when (value) {
-        is String -> writableMap.putString(key, value)
-        is Number -> writableMap.putDouble(key, value.toDouble())
-        is Boolean -> writableMap.putBoolean(key, value)
-        is Map<*, *> -> writableMap.putMap(key, toWritableMap(value as? Map<String, Any?>))
-        null -> writableMap.putNull(key)
-        else -> writableMap.putString(key, value.toString())
+        is String -> writableMap.putString(key, this.getString(key))
+        is Double -> writableMap.putDouble(key, this.getDouble(key))
+        is Long -> writableMap.putLong(key, this.getLong(key))
+        is Int, is Number -> writableMap.putInt(key, this.getInt(key))
+        is Boolean -> writableMap.putBoolean(key, this.getBoolean(key))
+        is JSONObject -> writableMap.putMap(key, this.getJSONObject(key).toWritableMap())
+        is JSONArray -> writableMap.putArray(key, this.getJSONArray(key).toWritableArray())
+        JSONObject.NULL, null -> {}
       }
     }
 

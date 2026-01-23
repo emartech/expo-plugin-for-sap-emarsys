@@ -1,12 +1,12 @@
 package com.emarsys.reactnative.wrapper
 
-import com.emarsys.Emarsys
 import com.emarsys.core.api.result.Try
+import com.emarsys.Emarsys
 import com.emarsys.mobileengage.api.inbox.InboxResult
-import com.emarsys.reactnative.utils.InboxMessageUtils
+import com.emarsys.reactnative.utils.ArrayUtils.toWritableArray
+import com.emarsys.reactnative.utils.mappers.MessageMapper
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.Arguments
 
 class NativeEmarsysInbox(reactContext: ReactApplicationContext) : NativeEmarsysInboxSpec(reactContext) {
 
@@ -20,24 +20,17 @@ class NativeEmarsysInbox(reactContext: ReactApplicationContext) : NativeEmarsysI
     try {
       Emarsys.messageInbox.fetchMessages { result: Try<InboxResult> ->
         if (result.errorCause == null) {
-          val messageList = Arguments.createArray()
-          val inboxResult = result.result
-          if (inboxResult?.messages != null) {
-            for (message in inboxResult.messages) {
-              val messageMap = InboxMessageUtils.convertMessageToMap(message)
-              messageList.pushMap(messageMap)
-            }
-          }
-          promise.resolve(messageList)
+          val messages = result.result?.messages?.toWritableArray(MessageMapper::toWritableMap)
+          promise.resolve(messages)
         } else {
           promise.reject(NAME, "fetchMessages", result.errorCause)
         }
-        
       }
     } catch (e: Exception) {
       promise.reject(NAME, "fetchMessages", e)
     }
   }
+
   override fun addTag(tag: String, messageId: String, promise: Promise) {
     try {
       Emarsys.messageInbox.addTag(tag, messageId) { errorCause: Throwable? ->
@@ -65,4 +58,5 @@ class NativeEmarsysInbox(reactContext: ReactApplicationContext) : NativeEmarsysI
       promise.reject(NAME, "removeTag", e)
     }
   }
+
 }

@@ -8,7 +8,7 @@ export function ScrollView({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function Button({ title, action, printResult = false }: { title: string, action: () => Promise<any>, printResult?: boolean }) {
+export function Button({ title, action, printResult = false }: { title: string; action: () => Promise<any>; printResult?: boolean }) {
   return (
     <Pressable onPress={async () => {
       try {
