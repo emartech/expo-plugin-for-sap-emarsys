@@ -1,9 +1,9 @@
-import type { Spec, InboxMessage } from '../../src/wrapper/NativeEmarsysInbox';
+import type { Spec, Message } from '../../src/wrapper/native/NativeEmarsysInbox';
 
 describe('NativeEmarsysInbox', () => {
   let mockInbox: Spec;
 
-  const mockInboxMessage: InboxMessage = {
+  const mockInboxMessage: Message = {
     id: '123',
     campaignId: 'campaign-123',
     collapseId: 'collapse-123',
@@ -13,7 +13,7 @@ describe('NativeEmarsysInbox', () => {
     receivedAt: 1234567890,
     updatedAt: 1234567890,
     expiresAt: '',
-    tags: ['tag1', 'tag2'],
+    tags: ['seen', 'opened'],
     properties: { key1: 'value1', key2: 'value2' },
     actions: [
       {
@@ -181,7 +181,7 @@ describe('NativeEmarsysInbox', () => {
       const message = result[0];
 
       expect(Array.isArray(message.tags)).toBe(true);
-      expect(message.tags).toContain('tag1');
+      expect(message.tags).toContain('seen');
     });
 
     it('should validate message properties is an object', async () => {
@@ -192,7 +192,7 @@ describe('NativeEmarsysInbox', () => {
       const message = result[0];
 
       expect(typeof message.properties).toBe('object');
-      expect(message.properties.key1).toBe('value1');
+      expect((message.properties as any).key1).toBe('value1');
     });
 
     it('should validate message actions are an array', async () => {
@@ -203,9 +203,9 @@ describe('NativeEmarsysInbox', () => {
       const message = result[0];
 
       expect(Array.isArray(message.actions)).toBe(true);
-      expect(message.actions[0]).toHaveProperty('id');
-      expect(message.actions[0]).toHaveProperty('title');
-      expect(message.actions[0]).toHaveProperty('type');
+      expect(message.actions?.[0]).toHaveProperty('id');
+      expect(message.actions?.[0]).toHaveProperty('title');
+      expect(message.actions?.[0]).toHaveProperty('type');
     });
   });
 });

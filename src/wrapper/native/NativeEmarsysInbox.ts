@@ -22,7 +22,7 @@ export type Message = {
   receivedAt: number;
   updatedAt?: number | null;
   expiresAt?: string | null;
-  tags?: Tag | null;
+  tags?: Tag[] | null;
   properties?: UnsafeObject | null;
   actions?: ActionModel[] | null;
 };
