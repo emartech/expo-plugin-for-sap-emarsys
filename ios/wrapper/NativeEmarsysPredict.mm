@@ -84,12 +84,12 @@ RCT_EXPORT_MODULE()
       filters:[filters map:FilterMapper.toModel]
       limit:limit availabilityZone:availabilityZone
       productsBlock:^(NSArray<id<EMSProductProtocol>> *products, NSError *error) {
-        if (error == nil) {
-          NSArray *_products = [products map:ProductMapper.toDictionary];
-          resolve(_products);
-        } else {
-          reject(NAME, @"recommendProducts", error);
-        }
+      if (error == nil) {
+        NSArray *_products = [products map:ProductMapper.toDictionary];
+        resolve(_products);
+      } else {
+        reject(NAME, @"recommendProducts", error);
+      }
     }];
   } @catch (NSException *exception) {
     reject(exception.name, exception.reason, nil);

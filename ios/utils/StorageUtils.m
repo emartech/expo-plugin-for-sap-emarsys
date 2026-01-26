@@ -4,13 +4,22 @@
 
 @implementation StorageUtils
 
+static NSUserDefaults *_userDefaults;
+
++ (NSUserDefaults *)userDefaults {
+  if (_userDefaults == nil) {
+    _userDefaults = [[NSUserDefaults alloc] initWithSuiteName:STORE_NAME];
+  }
+  return _userDefaults;
+}
+
 + (NSString *)stringForKey:(NSString *)key {
   NSString *value = [self userDefaultsStringForKey:key] ?: [self infoPListStringForKey:key];
   return ![value isEqualToString:@""] ? value : nil;
 }
 
 + (NSString *)userDefaultsStringForKey:(NSString *)key {
-  return [[[NSUserDefaults alloc] initWithSuiteName:STORE_NAME] stringForKey:key];
+  return [[self userDefaults] stringForKey:key];
 }
 
 + (NSString *)infoPListStringForKey:(NSString *)key {
@@ -33,7 +42,7 @@
 }
 
 + (void)setUserDefaultsString:(NSString *)value forKey:(NSString *)key {
-  [[[NSUserDefaults alloc] initWithSuiteName:STORE_NAME] setObject:value forKey:key];
+  [[self userDefaults] setObject:value forKey:key];
 }
 
 @end

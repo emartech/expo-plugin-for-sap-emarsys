@@ -1,4 +1,4 @@
-import type { Spec } from '../../src/wrapper/NativeEmarsysConfig';
+import type { Spec } from '../../src/wrapper/native/NativeEmarsysConfig';
 
 describe('NativeEmarsysConfig', () => {
   let mockConfig: Spec;
