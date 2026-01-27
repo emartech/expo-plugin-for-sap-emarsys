@@ -25,11 +25,11 @@ export const withEmarsysDangerousMod: ConfigPlugin<EMSOptions> = (config, _optio
         fs.mkdirSync(`${destDir}`);
       }
       for (const file of NOTIFICATION_SERVICE_FILES) {
-        fs.copyFileSync(`${sourceDir}/${file}`, `${destDir}/${file}`);
+        fs.copyFileSync(path.join(sourceDir, file), path.join(destDir, file));
       }
 
       // Update Podfile
-      const podfilePath = `${projectRoot}/ios/Podfile`;
+      const podfilePath = path.join(projectRoot, 'ios', 'Podfile')
       const podfile = fs.readFileSync(podfilePath);
       if (!podfile.includes(`target '${NOTIFICATION_SERVICE_TARGET}'`)) {
         fs.appendFileSync(podfilePath, `

@@ -2,15 +2,16 @@ const { withDangerousMod, withXcodeProject } = require('expo/config-plugins');
 const fs = require('fs');
 const path = require('path');
 
-const TEST_TARGET_NAME = 'ExpoPluginForSAPEmarsysTests';
+const TEST_TARGET_NAME = 'ExpoPluginForSAPEmarsysTest';
 
-// Copy test files from example/tests into the iOS project during prebuild
+// Copy test files from ios/test into the iOS project during prebuild
 const withTestFiles = (config) => {
   return withDangerousMod(config, [
     'ios',
     (config) => {
       const projectRoot = config.modRequest.projectRoot;
-      const sourceTestsDir = path.join(projectRoot, 'tests', 'ios', TEST_TARGET_NAME);
+      const pluginDir = `${projectRoot}/node_modules/expo-plugin-for-sap-emarsys`;
+      const sourceTestsDir = path.join(pluginDir, 'ios', 'test');
       const targetTestsDir = path.join(projectRoot, 'ios', TEST_TARGET_NAME);
 
       if (!fs.existsSync(sourceTestsDir)) {
@@ -64,7 +65,7 @@ const withTestTarget = (config) => {
       TEST_TARGET_NAME,
       'unit_test_bundle',
       TEST_TARGET_NAME,
-      `${config.ios?.bundleIdentifier}.tests`,
+      `${config.ios?.bundleIdentifier}.${TEST_TARGET_NAME}`,
     );
 
     const pbxGroup = config.modResults.addPbxGroup(
@@ -112,7 +113,7 @@ const withTestTarget = (config) => {
               buildSettings[setting] = existingBuildSettings[setting];
             }
           }
-          buildSettings['INFOPLIST_FILE'] = `${TEST_TARGET_NAME}/Info.plist`;
+          buildSettings['INFOPLIST_FILE'] = `${TEST_TARGET_NAME}/Test-Info.plist`;
           buildSettings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1';
         }
       }

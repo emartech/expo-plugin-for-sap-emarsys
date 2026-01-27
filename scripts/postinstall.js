@@ -6,6 +6,7 @@ const fs = require('fs').promises;
   podspec = podspec.replace("'..', 'package.json'", "'package.json'");
   podspec = podspec.replace("s.dependency 'ExpoModulesCore'", "");
   podspec = podspec.replace("s.source_files = '", "s.source_files = 'ios/");
+  podspec = podspec.replace("s.exclude_files = '", "s.exclude_files = 'ios/");
   await fs.writeFile('ExpoPluginForSAPEmarsys.podspec', podspec);
 
   // Check if expo exist
