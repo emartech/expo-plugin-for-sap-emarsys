@@ -31,12 +31,19 @@ jobs:
     - name: Use Xcode 16.4
       run: sudo xcode-select -switch /Applications/Xcode_16.4.app
 
+    - name: Build app for testing
+      working-directory: example/ios
+      run: |
+        xcodebuild build-for-testing \
+          -workspace expoemarsyspluginexample.xcworkspace \
+          -scheme expoemarsyspluginexample \
+          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6' \
+          -quiet
+
     - name: Run iOS Tests
       working-directory: example/ios
       run: |
         xcodebuild test \
           -workspace expoemarsyspluginexample.xcworkspace \
-          -scheme ExpoPluginForSAPEmarsysTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6' \
-          -only-testing:ExpoPluginForSAPEmarsysTests \
-          -quiet
+          -scheme ExpoPluginForSAPEmarsysTest \
+          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6'

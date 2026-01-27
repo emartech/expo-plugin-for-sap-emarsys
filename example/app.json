@@ -52,7 +52,7 @@
           "iosSharedKeychainAccessGroup": "4J5FXBB97U.com.ems.EmarsysShared"
         }
       ],
-      ["./plugins/withNativeIosTest.ts"]
+      ["./plugins/ios/withNativeTest.ts"]
     ]
   }
 }
