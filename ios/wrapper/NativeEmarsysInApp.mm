@@ -1,5 +1,6 @@
 #import <EmarsysSDK/Emarsys.h>
 #import <NativeEmarsys/NativeEmarsys.h>
+#import "WrapperUtils.h"
 
 #define NAME @"NativeEmarsysInApp"
 
@@ -20,7 +21,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.inApp pause];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"pause", [NSError errorWithException:exception]);
   }
 }
 
@@ -29,7 +30,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.inApp resume];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"resume", [NSError errorWithException:exception]);
   }
 }
 
@@ -38,7 +39,7 @@ RCT_EXPORT_MODULE()
     BOOL isPaused = [Emarsys.inApp isPaused];
     resolve(@(isPaused));
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"isPaused", [NSError errorWithException:exception]);
   }
 }
 

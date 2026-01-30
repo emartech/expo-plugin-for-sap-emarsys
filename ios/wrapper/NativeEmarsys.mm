@@ -1,6 +1,7 @@
 #import <EmarsysSDK/Emarsys.h>
 #import <NativeEmarsys/NativeEmarsys.h>
 #import "EventUtils.h"
+#import "WrapperUtils.h"
 
 #define NAME @"NativeEmarsys"
 
@@ -35,7 +36,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"setContact", [NSError errorWithException:exception]);
   }
 }
 
@@ -49,7 +50,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"clearContact", [NSError errorWithException:exception]);
   }
 }
 
@@ -65,7 +66,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackCustomEvent", [NSError errorWithException:exception]);
   }
 }
 
@@ -77,7 +78,7 @@ RCT_EXPORT_MODULE()
       resolve(source);
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackDeepLink", [NSError errorWithException:exception]);
   }
 }
 

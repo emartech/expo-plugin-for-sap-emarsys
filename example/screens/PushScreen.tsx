@@ -36,13 +36,14 @@ export default function PushScreen() {
       <Button title="Is Enabled" action={async () => {
         return await Emarsys.geofence.isEnabled();
       }} printResult />
-      <Button title="Initial Enter Trigger Enabled" action={async () => {
+      <Button title="Set Initial Enter Trigger Enabled" action={async () => {
         await Emarsys.geofence.setInitialEnterTriggerEnabled(true);
       }} />
-      <Button title="Registered Geofences" action={async () => {
+      <Button title="Get Registered Geofences" action={async () => {
         const geofences = await Emarsys.geofence.getRegisteredGeofences();
         return JSON.stringify(geofences);
       }} printResult />
+
     </ScrollView>
   );
 }

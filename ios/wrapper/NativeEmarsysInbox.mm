@@ -2,6 +2,7 @@
 #import <NativeEmarsys/NativeEmarsys.h>
 #import "ArrayUtils.h"
 #import "MessageMapper.h"
+#import "WrapperUtils.h"
 
 #define NAME @"NativeEmarsysInbox"
 
@@ -28,7 +29,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"fetchMessages", [NSError errorWithException:exception]);
   }
 }
 
@@ -43,7 +44,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"addTag", [NSError errorWithException:exception]);
   }
 }
 
@@ -58,7 +59,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"removeTag", [NSError errorWithException:exception]);
   }
 }
 

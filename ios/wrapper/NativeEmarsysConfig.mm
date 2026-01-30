@@ -1,6 +1,7 @@
 #import <EmarsysSDK/Emarsys.h>
 #import <NativeEmarsys/NativeEmarsys.h>
 #import "StorageUtils.h"
+#import "WrapperUtils.h"
 
 #define NAME @"NativeEmarsysConfig"
 
@@ -28,7 +29,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"changeApplicationCode", [NSError errorWithException:exception]);
   }
 }
 
@@ -44,7 +45,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"changeMerchantId", [NSError errorWithException:exception]);
   }
 }
 
@@ -53,7 +54,7 @@ RCT_EXPORT_MODULE()
     NSString *applicationCode = [Emarsys.config applicationCode];
     resolve(applicationCode);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"getApplicationCode", [NSError errorWithException:exception]);
   }
 }
 
@@ -62,7 +63,7 @@ RCT_EXPORT_MODULE()
     NSString *merchantId = [Emarsys.config merchantId];
     resolve(merchantId);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"getMerchantId", [NSError errorWithException:exception]);
   }
 }
 
@@ -71,7 +72,7 @@ RCT_EXPORT_MODULE()
     NSNumber *contactFieldId = [Emarsys.config contactFieldId];
     resolve(contactFieldId);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"getContactFieldId", [NSError errorWithException:exception]);
   }
 }
 
@@ -80,7 +81,7 @@ RCT_EXPORT_MODULE()
     NSString *clientId = [Emarsys.config clientId];
     resolve(clientId);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"getClientId", [NSError errorWithException:exception]);
   }
 }
 
@@ -89,7 +90,7 @@ RCT_EXPORT_MODULE()
     NSString *languageCode = [Emarsys.config languageCode];
     resolve(languageCode);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"getLanguageCode", [NSError errorWithException:exception]);
   }
 }
 
@@ -98,7 +99,7 @@ RCT_EXPORT_MODULE()
     NSString *sdkVersion = [Emarsys.config sdkVersion];
     resolve(sdkVersion);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"getSdkVersion", [NSError errorWithException:exception]);
   }
 }
 

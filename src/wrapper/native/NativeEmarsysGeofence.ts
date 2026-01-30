@@ -29,11 +29,3 @@ export type Trigger = {
   loiteringDelay: number;
   action: UnsafeObject;
 };
-
-export type ActionModel = {
-  id: string;
-  type: string;
-  name?: string | null;
-  payload?: UnsafeObject | null;
-  url?: string | null;
-};

@@ -2,6 +2,7 @@
 #import <NativeEmarsys/NativeEmarsys.h>
 #import "ArrayUtils.h"
 #import "GeofenceMapper.h"
+#import "WrapperUtils.h"
 
 #define NAME @"NativeEmarsysGeofence"
 
@@ -10,6 +11,7 @@
 @end
 
 @implementation NativeEmarsysGeofence
+
 RCT_EXPORT_MODULE()
 
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const facebook::react::ObjCTurboModule::InitParams &)params {
@@ -21,7 +23,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.geofence requestAlwaysAuthorization];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"requestAlwaysAuthorization", [NSError errorWithException:exception]);
   }
 }
 
@@ -35,7 +37,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"enable", [NSError errorWithException:exception]);
   }
 }
 
@@ -44,7 +46,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.geofence disable];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"disable", [NSError errorWithException:exception]);
   }
 }
 
@@ -53,16 +55,16 @@ RCT_EXPORT_MODULE()
     BOOL isEnabled = [Emarsys.geofence isEnabled];
     resolve(@(isEnabled));
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"isEnabled", [NSError errorWithException:exception]);
   }
 }
 
-- (void)setInitialEnterTriggerEnabled:(BOOL)enabled resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject {
+- (void)setInitialEnterTriggerEnabled:(BOOL)enabled resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   @try {
     Emarsys.geofence.initialEnterTriggerEnabled = enabled;
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"setInitialEnterTriggerEnabled", [NSError errorWithException:exception]);
   }
 }
 
@@ -71,7 +73,7 @@ RCT_EXPORT_MODULE()
     NSArray *registeredGeofences = [Emarsys.geofence.registeredGeofences map:GeofenceMapper.toDictionary];
     resolve(registeredGeofences);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"getRegisteredGeofences", [NSError errorWithException:exception]);
   }
 }
 

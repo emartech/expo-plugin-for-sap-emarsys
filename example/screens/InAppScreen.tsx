@@ -10,16 +10,16 @@ export default function PushScreen() {
 
   return (
     <ScrollView>
-      <Button title="InApp Pause" action={async () => {
+      <Button title="Pause" action={async () => {
         await Emarsys.inApp.pause();
       }} />
-      <Button title="InApp Resume" action={async () => {
+      <Button title="Resume" action={async () => {
         await Emarsys.inApp.resume();
       }} />
-      <Button title="InApp Is Paused" action={async () => {
+      <Button title="Is Paused" action={async () => {
         return await Emarsys.inApp.isPaused();
       }} printResult />
-      <Button title="InApp Load Inline InApp" action={async () => {
+      <Button title="Load Inline InApp" action={async () => {
         const viewId = 'view-id';
         Emarsys.inApp.loadInlineInApp(inlineInAppView.current, viewId);
       }} />

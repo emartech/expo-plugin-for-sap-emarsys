@@ -61,10 +61,11 @@ class NativeEmarsysGeofence(reactContext: ReactApplicationContext) : NativeEmars
 
   override fun getRegisteredGeofences(promise: Promise) {
     try {
-      val geofences = Emarsys.geofence.registeredGeofences.toWritableArray(GeofenceMapper::toWritableMap)
-      promise.resolve(geofences)
+      val registeredGeofences = Emarsys.geofence.registeredGeofences.toWritableArray(GeofenceMapper::toWritableMap)
+      promise.resolve(registeredGeofences)
     } catch (e: Exception) {
       promise.reject(NAME, "getRegisteredGeofences", e)
     }
   }
+
 }

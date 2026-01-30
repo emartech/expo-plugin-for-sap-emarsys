@@ -25,10 +25,11 @@ object GeofenceMapper {
   fun toTriggerWritableMap(trigger: Trigger): WritableMap {
     val writableMap = Arguments.createMap()
     writableMap.put("id", trigger.id)
-    writableMap.put("type", trigger.type?.name)
+    writableMap.put("type", trigger.type.name)
     writableMap.put("loiteringDelay", trigger.loiteringDelay)
     writableMap.put("action", trigger.action.toWritableMap())
 
     return writableMap
   }
+
 }
