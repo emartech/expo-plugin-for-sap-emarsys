@@ -1,6 +1,7 @@
 #import <EmarsysSDK/Emarsys.h>
 #import <NativeEmarsys/NativeEmarsys.h>
 #import "StringUtils.h"
+#import "WrapperUtils.h"
 
 #define NAME @"NativeEmarsysPush"
 
@@ -26,7 +27,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"setPushToken", [NSError errorWithException:exception]);
   }
 }
 
@@ -40,7 +41,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"clearPushToken", [NSError errorWithException:exception]);
   }
 }
 
@@ -49,7 +50,7 @@ RCT_EXPORT_MODULE()
     NSString *pushToken = [[Emarsys.push pushToken] deviceTokenString];
     resolve(pushToken);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"getPushToken", [NSError errorWithException:exception]);
   }
 }
 

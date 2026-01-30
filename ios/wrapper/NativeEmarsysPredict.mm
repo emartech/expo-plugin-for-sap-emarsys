@@ -5,6 +5,7 @@
 #import "FilterMapper.h"
 #import "LogicMapper.h"
 #import "ProductMapper.h"
+#import "WrapperUtils.h"
 
 #define NAME @"NativeEmarsysPredict"
 
@@ -25,7 +26,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.predict trackCartWithCartItems:[items map:CartItemMapper.toModel]];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackCart", [NSError errorWithException:exception]);
   }
 }
 
@@ -35,7 +36,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.predict trackPurchaseWithOrderId:orderId items:[items map:CartItemMapper.toModel]];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackPurchase", [NSError errorWithException:exception]);
   }
 }
 
@@ -44,7 +45,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.predict trackItemViewWithItemId:itemId];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackItemView", [NSError errorWithException:exception]);
   }
 }
 
@@ -53,7 +54,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.predict trackCategoryViewWithCategoryPath:categoryPath];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackCategoryView", [NSError errorWithException:exception]);
   }
 }
 
@@ -62,7 +63,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.predict trackSearchWithSearchTerm:searchTerm];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackSearchTerm", [NSError errorWithException:exception]);
   }
 }
 
@@ -72,7 +73,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.predict trackTag:tag withAttributes:attributes];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackTag", [NSError errorWithException:exception]);
   }
 }
 
@@ -92,7 +93,7 @@ RCT_EXPORT_MODULE()
       }
     }];
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"recommendProducts", [NSError errorWithException:exception]);
   }
 }
 
@@ -102,7 +103,7 @@ RCT_EXPORT_MODULE()
     [Emarsys.predict trackRecommendationClick:[ProductMapper toModel:product]];
     resolve(nil);
   } @catch (NSException *exception) {
-    reject(exception.name, exception.reason, nil);
+    reject(NAME, @"trackRecommendationClick", [NSError errorWithException:exception]);
   }
 }
 

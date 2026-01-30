@@ -17,6 +17,11 @@
       "bundleIdentifier": "expo.emarsysplugin.example",
       "entitlements": {
         "aps-environment": "development"
+      },
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app needs access to location when in use for geofencing features.",
+        "NSLocationAlwaysUsageDescription": "This app needs access to location always for geofencing features.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app needs access to location for geofencing features."
       }
     },
     "android": {
@@ -25,7 +30,12 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "expo.modules.emarsysplugin.example"
+      "package": "expo.modules.emarsysplugin.example",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
