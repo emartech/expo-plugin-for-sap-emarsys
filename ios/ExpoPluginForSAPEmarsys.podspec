@@ -28,4 +28,5 @@ Pod::Spec.new do |s|
   s.dependency 'EmarsysSDK', '~> 3.9.0'
 
   s.source_files = '**/*.{h,m,mm,swift,hpp,cpp}'
+  s.exclude_files = 'test/**/*'
 end
