@@ -1,4 +1,5 @@
 #import <EmarsysSDK/EMSProduct.h>
+#import <EmarsysSDK/EMSProductProtocol.h>
 #import "Mapper.h"
 
 @interface ProductMapper : NSObject

@@ -3,7 +3,7 @@
 
 @implementation ProductMapper
 
-static Mapper _toDictionary = ^NSDictionary *(EMSProduct *product) {
+static Mapper _toDictionary = ^NSDictionary *(id<EMSProductProtocol> product) {
   NSMutableDictionary<NSString *, NSObject *> *dictionary = [NSMutableDictionary dictionary];
   dictionary[@"productId"] = product.productId;
   dictionary[@"title"] = product.title;

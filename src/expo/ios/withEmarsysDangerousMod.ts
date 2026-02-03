@@ -37,8 +37,8 @@ target '${NOTIFICATION_SERVICE_TARGET}' do
   use_frameworks!
 
   pod 'EmarsysNotificationService'
-end`
-        );
+end
+`       );
       }
 
       return config;
