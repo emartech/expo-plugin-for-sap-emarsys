@@ -142,7 +142,8 @@ target 'NotificationService' do
   use_frameworks!
 
   pod 'EmarsysNotificationService'
-end`;
+end
+`;
 
     it('should read existing Podfile', () => {
       withEmarsysDangerousMod(mockConfig, mockOptions);

@@ -29,7 +29,7 @@ const withTestFiles = (config) => {
         let podfileContent = fs.readFileSync(podfilePath, 'utf8');
         
         if (!podfileContent.includes(`target '${TEST_TARGET_NAME}'`)) {
-          const mainTargetRegex = /target\s+'expoemarsyspluginexample'\s+do([\s\S]*?)(\n\s*end)/;
+          const mainTargetRegex = /target\s+'expoemarsyspluginexample'\s+do([\s\S]*?)(\nend)/;
           const match = podfileContent.match(mainTargetRegex);
           
           if (match) {

@@ -1,6 +1,4 @@
 #import <XCTest/XCTest.h>
-#import <EmarsysSDK/EMSGeofence.h>
-#import <EmarsysSDK/EMSGeofenceTrigger.h>
 #import "GeofenceMapper.h"
 
 @interface GeofenceMapperTest: XCTestCase

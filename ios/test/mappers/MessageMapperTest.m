@@ -1,8 +1,4 @@
 #import <XCTest/XCTest.h>
-#import <EmarsysSDK/EMSMessage.h>
-#import <EmarsysSDK/EMSActionModelProtocol.h>
-#import <EmarsysSDK/EMSAppEventActionModel.h>
-#import <EmarsysSDK/EMSOpenExternalUrlActionModel.h>
 #import "MessageMapper.h"
 
 @interface MessageMapperTest: XCTestCase
